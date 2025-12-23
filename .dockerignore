@@ -1,0 +1,36 @@
+.git
+.github
+
+# Python
+**/__pycache__/
+**/*.py[cod]
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Local env / secrets / data
+.env
+.env.*
+*.env
+.data/
+*.db
+*.sqlite
+*.sqlite3
+
+# Node / Next.js (local only; Docker build installs deps fresh)
+**/node_modules/
+**/.next/
+**/out/
+**/.turbo/
+**/*.log
+
+# Editor / OS
+.DS_Store
+.idea/
+.vscode/
+
+# Accidental duplicate files (seen as "… 2.*" after conflict resolution)
+**/* 2
+**/* 2.*
+
+
