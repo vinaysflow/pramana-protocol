@@ -18,7 +18,8 @@ def _default_database_url() -> str:
 
     # Hugging Face Spaces: prefer persistent SQLite
     if os.getenv("SPACE_ID") or os.getenv("HF_SPACE") or os.getenv("HF_HOME"):
-        return "sqlite:////data/pramana.db"
+        # Default to /tmp to work on all Spaces tiers; users can override to /data via DATABASE_URL.
+        return "sqlite:////tmp/pramana.db"
 
     # Local dev default (docker-compose)
     return "postgresql://pramana:pramana_dev_password@localhost:5432/pramana"
