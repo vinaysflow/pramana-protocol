@@ -1,3 +1,9 @@
+---
+title: Pramana Demo
+sdk: docker
+pinned: false
+---
+
 ## Pramana Protocol
 
 Portable AI agent identity using W3C DIDs + VCs with instant revocation.
