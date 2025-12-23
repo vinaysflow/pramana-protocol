@@ -14,9 +14,11 @@ def _strict_migrations() -> bool:
 
 
 def _try_alembic_upgrade() -> bool:
-    # Test hook to force failure
-    if os.getenv('FORCE_ALEMBIC_FAIL', '').lower() in {'1','true','yes'}:
-        return False
+    # Test hook to force failure. Only honored in prod/test modes so a dev/demo
+    # deployment can't be accidentally bricked by leaving this env var set.
+    if os.getenv('FORCE_ALEMBIC_FAIL', '').lower() in {'1', 'true', 'yes'}:
+        if os.getenv('ENV', 'dev').lower() in {'prod', 'production', 'test'}:
+            return False
 
     try:
         from alembic import command
