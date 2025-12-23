@@ -8,7 +8,26 @@ Create Date: 2025-12-22
 
 from alembic import op
 import sqlalchemy as sa
-from sqlalchemy.dialects import postgresql
+
+
+def _uuid_type() -> sa.types.TypeEngine:
+    # Keep native UUID on Postgres; use portable string UUID elsewhere (e.g. SQLite).
+    bind = op.get_bind()
+    if bind is not None and bind.dialect.name == "postgresql":
+        from sqlalchemy.dialects import postgresql
+
+        return postgresql.UUID(as_uuid=True)
+    return sa.String(length=36)
+
+
+def _json_type() -> sa.types.TypeEngine:
+    # Keep JSONB on Postgres; use JSON elsewhere (SQLite stores as TEXT).
+    bind = op.get_bind()
+    if bind is not None and bind.dialect.name == "postgresql":
+        from sqlalchemy.dialects import postgresql
+
+        return postgresql.JSONB(astext_type=sa.Text())
+    return sa.JSON()
 
 revision = "0001_initial"
 down_revision = None
@@ -19,7 +38,7 @@ depends_on = None
 def upgrade() -> None:
     op.create_table(
         "agents",
-        sa.Column("id", postgresql.UUID(as_uuid=True), primary_key=True, nullable=False),
+        sa.Column("id", _uuid_type(), primary_key=True, nullable=False),
         sa.Column("name", sa.String(length=200), nullable=False),
         sa.Column("did", sa.String(length=500), nullable=False, unique=True),
         sa.Column("created_at", sa.DateTime(timezone=True), nullable=False),
@@ -27,7 +46,7 @@ def upgrade() -> None:
 
     op.create_table(
         "status_lists",
-        sa.Column("id", postgresql.UUID(as_uuid=True), primary_key=True, nullable=False),
+        sa.Column("id", _uuid_type(), primary_key=True, nullable=False),
         sa.Column("purpose", sa.String(length=50), nullable=False),
         sa.Column("bitstring", sa.Text(), nullable=False),
         sa.Column("size", sa.Integer(), nullable=False),
@@ -36,10 +55,10 @@ def upgrade() -> None:
 
     op.create_table(
         "keys",
-        sa.Column("id", postgresql.UUID(as_uuid=True), primary_key=True, nullable=False),
-        sa.Column("agent_id", postgresql.UUID(as_uuid=True), sa.ForeignKey("agents.id"), nullable=False),
+        sa.Column("id", _uuid_type(), primary_key=True, nullable=False),
+        sa.Column("agent_id", _uuid_type(), sa.ForeignKey("agents.id"), nullable=False),
         sa.Column("kid", sa.String(length=600), nullable=False, unique=True),
-        sa.Column("public_jwk", postgresql.JSONB(astext_type=sa.Text()), nullable=False),
+        sa.Column("public_jwk", _json_type(), nullable=False),
         sa.Column("private_key_enc", sa.Text(), nullable=False),
         sa.Column("created_at", sa.DateTime(timezone=True), nullable=False),
         sa.Column("rotated_at", sa.DateTime(timezone=True), nullable=True),
@@ -47,13 +66,13 @@ def upgrade() -> None:
 
     op.create_table(
         "credentials",
-        sa.Column("id", postgresql.UUID(as_uuid=True), primary_key=True, nullable=False),
-        sa.Column("issuer_agent_id", postgresql.UUID(as_uuid=True), sa.ForeignKey("agents.id"), nullable=False),
+        sa.Column("id", _uuid_type(), primary_key=True, nullable=False),
+        sa.Column("issuer_agent_id", _uuid_type(), sa.ForeignKey("agents.id"), nullable=False),
         sa.Column("subject_did", sa.String(length=600), nullable=False),
         sa.Column("credential_type", sa.String(length=200), nullable=False),
         sa.Column("jti", sa.String(length=200), nullable=False, unique=True),
         sa.Column("jwt", sa.Text(), nullable=False),
-        sa.Column("status_list_id", postgresql.UUID(as_uuid=True), sa.ForeignKey("status_lists.id"), nullable=False),
+        sa.Column("status_list_id", _uuid_type(), sa.ForeignKey("status_lists.id"), nullable=False),
         sa.Column("status_list_index", sa.Integer(), nullable=False),
         sa.Column("issued_at", sa.DateTime(timezone=True), nullable=False),
         sa.Column("expires_at", sa.DateTime(timezone=True), nullable=True),
@@ -61,12 +80,12 @@ def upgrade() -> None:
 
     op.create_table(
         "audit_events",
-        sa.Column("id", postgresql.UUID(as_uuid=True), primary_key=True, nullable=False),
+        sa.Column("id", _uuid_type(), primary_key=True, nullable=False),
         sa.Column("event_type", sa.String(length=100), nullable=False),
         sa.Column("actor", sa.String(length=200), nullable=False),
         sa.Column("resource_type", sa.String(length=100), nullable=False),
         sa.Column("resource_id", sa.String(length=200), nullable=False),
-        sa.Column("payload_json", postgresql.JSONB(astext_type=sa.Text()), nullable=False),
+        sa.Column("payload_json", _json_type(), nullable=False),
         sa.Column("created_at", sa.DateTime(timezone=True), nullable=False),
     )
 
