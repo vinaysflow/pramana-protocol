@@ -1,5 +1,6 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import RedirectResponse
 from api.middleware.limits import MaxBodySizeMiddleware
 from api.middleware.rate_limit import SimpleRateLimitMiddleware
 
@@ -23,6 +24,28 @@ app = FastAPI(
     description="Portable AI Agent Identity using W3C Standards",
     version="0.1.0",
 )
+
+def _add_ui_trailing_slash_redirects(app: FastAPI) -> None:
+    # Next static export serves routes as /route/index.html. Ensure /route redirects to /route/
+    # so users don't hit Next's 404 page when requesting without the trailing slash.
+    ui_paths = [
+        "/demo",
+        "/issue",
+        "/verify",
+        "/revoke",
+        "/audit",
+        "/login",
+        "/auth/callback",
+    ]
+
+    for path in ui_paths:
+        async def _redir(request: Request, _path: str = path):
+            target = f"{_path}/"
+            if request.url.query:
+                target = f"{target}?{request.url.query}"
+            return RedirectResponse(url=target, status_code=307)
+
+        app.add_api_route(path, _redir, methods=["GET", "HEAD"], include_in_schema=False)
 
 if settings.cors_enabled:
     app.add_middleware(
@@ -105,4 +128,5 @@ async def api_root():
 
 
 # Mount UI last so API routes take precedence.
+_add_ui_trailing_slash_redirects(app)
 mount_ui(app)
