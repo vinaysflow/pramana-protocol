@@ -1,0 +1,10 @@
+[project]
+name = "pramana"
+version = "0.1.0"
+description = "Pramana Protocol SDK (Python)"
+requires-python = ">=3.9"
+dependencies = ["httpx>=0.26.0"]
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"

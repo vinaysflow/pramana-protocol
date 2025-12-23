@@ -1,0 +1,38 @@
+# --- build frontend static export ---
+FROM node:20-alpine AS frontend
+WORKDIR /app
+
+COPY frontend/package*.json ./
+RUN npm ci
+
+COPY frontend ./
+RUN npm run build
+# Next export output is written to /app/out when output:'export'
+
+
+# --- backend runtime ---
+FROM python:3.11-slim
+WORKDIR /app
+
+RUN apt-get update && apt-get install -y \
+    gcc \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY backend/requirements.txt ./backend/requirements.txt
+RUN pip install --no-cache-dir -r backend/requirements.txt
+
+COPY backend ./backend
+
+# Copy UI export into backend/static-ui
+COPY --from=frontend /app/out ./backend/static-ui
+
+ENV PYTHONPATH=/app/backend
+ENV HF_SPACE=1
+ENV DEMO_MODE=1
+ENV AUTH_MODE=oidc
+ENV PRAMANA_SCHEME=http
+
+# Hugging Face Spaces provides $PORT
+EXPOSE 7860
+
+CMD ["sh", "-lc", "cd backend && uvicorn main:app --host 0.0.0.0 --port ${PORT:-7860}"]

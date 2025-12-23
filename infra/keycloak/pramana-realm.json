@@ -1,0 +1,65 @@
+{
+  "realm": "pramana",
+  "enabled": true,
+  "displayName": "Pramana",
+  "clients": [
+    {
+      "clientId": "pramana-api",
+      "enabled": true,
+      "protocol": "openid-connect",
+      "publicClient": true,
+      "standardFlowEnabled": true,
+      "directAccessGrantsEnabled": true,
+      "redirectUris": ["http://127.0.0.1:6080/*", "http://localhost:6080/*"],
+      "webOrigins": ["http://127.0.0.1:6080", "http://localhost:6080"],
+      "defaultClientScopes": ["roles", "profile", "email"],
+      "optionalClientScopes": ["groups"],
+      "attributes": {
+        "pkce.code.challenge.method": "S256"
+      }
+    }
+  ],
+  "roles": {
+    "realm": [
+      {"name": "agents:create"},
+      {"name": "credentials:issue"},
+      {"name": "credentials:revoke"},
+      {"name": "tenant:admin"}
+    ]
+  },
+  "groups": [
+    {
+      "name": "tenants",
+      "subGroups": [
+        {"name": "demo"},
+        {"name": "acme"}
+      ]
+    }
+  ],
+  "users": [
+    {
+      "username": "demo-user",
+      "enabled": true,
+      "emailVerified": true,
+      "credentials": [{"type": "password", "value": "demo", "temporary": false}],
+      "realmRoles": ["agents:create", "credentials:issue", "credentials:revoke"],
+      "groups": ["/tenants/demo"]
+    },
+    {
+      "username": "acme-user",
+      "enabled": true,
+      "emailVerified": true,
+      "credentials": [{"type": "password", "value": "acme", "temporary": false}],
+      "realmRoles": ["agents:create", "credentials:issue", "credentials:revoke"],
+      "groups": ["/tenants/acme"]
+    },
+    {
+      "username": "demo-admin",
+      "enabled": true,
+      "emailVerified": true,
+      "credentials": [{"type": "password", "value": "admin", "temporary": false}],
+      "realmRoles": ["tenant:admin", "agents:create", "credentials:issue", "credentials:revoke"],
+      "groups": ["/tenants/demo"]
+    }
+  ]
+}

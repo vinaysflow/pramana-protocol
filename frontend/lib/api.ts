@@ -1,0 +1,50 @@
+export function apiBase(): string {
+  // In single-origin deployments (Spaces), browser should call the same origin.
+  // If NEXT_PUBLIC_API_URL is set (local multi-container), use it.
+  return process.env.NEXT_PUBLIC_API_URL || "";
+}
+
+export function getAccessToken(): string | null {
+  if (typeof window === "undefined") return null;
+  return window.localStorage.getItem("pramana_access_token");
+}
+
+export function setAccessToken(token: string) {
+  window.localStorage.setItem("pramana_access_token", token);
+}
+
+export function clearAccessToken() {
+  window.localStorage.removeItem("pramana_access_token");
+}
+
+function authHeaders(): Record<string, string> {
+  const t = getAccessToken();
+  return t ? { Authorization: `Bearer ${t}` } : {};
+}
+
+export async function apiPost<T>(path: string, body: unknown): Promise<T> {
+  const base = apiBase();
+  const res = await fetch(`${base}${path}`, {
+    method: "POST",
+    headers: { "content-type": "application/json", ...authHeaders() },
+    body: JSON.stringify(body),
+  });
+  if (!res.ok) {
+    const text = await res.text();
+    throw new Error(`${res.status} ${res.statusText}: ${text}`);
+  }
+  return (await res.json()) as T;
+}
+
+export async function apiGet<T>(path: string): Promise<T> {
+  const base = apiBase();
+  const res = await fetch(`${base}${path}`, {
+    method: "GET",
+    headers: { ...authHeaders() },
+  });
+  if (!res.ok) {
+    const text = await res.text();
+    throw new Error(`${res.status} ${res.statusText}: ${text}`);
+  }
+  return (await res.json()) as T;
+}
