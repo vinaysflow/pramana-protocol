@@ -17,7 +17,8 @@ def _uuid_type() -> sa.types.TypeEngine:
         from sqlalchemy.dialects import postgresql
 
         return postgresql.UUID(as_uuid=True)
-    return sa.String(length=36)
+    # Use SQLAlchemy's generic Uuid type so uuid.UUID values bind correctly on SQLite.
+    return sa.Uuid(as_uuid=True)
 
 
 def _json_type() -> sa.types.TypeEngine:
