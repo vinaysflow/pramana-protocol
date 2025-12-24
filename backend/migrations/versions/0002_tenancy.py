@@ -22,18 +22,36 @@ def upgrade() -> None:
         sa.Column("created_at", sa.DateTime(timezone=True), nullable=False),
     )
 
-    for table in ["agents", "keys", "credentials", "status_lists", "audit_events"]:
-        op.add_column(table, sa.Column("tenant_id", sa.String(length=100), nullable=False, server_default="default"))
-        op.create_index(f"ix_{table}_tenant_id", table, ["tenant_id"], unique=False)
+    bind = op.get_bind()
+    is_sqlite = bind is not None and bind.dialect.name == "sqlite"
 
-    # Remove server defaults after backfill
     for table in ["agents", "keys", "credentials", "status_lists", "audit_events"]:
-        op.alter_column(table, "tenant_id", server_default=None)
+        # SQLite needs batch mode for reliable ALTER TABLE operations.
+        if is_sqlite:
+            with op.batch_alter_table(table) as batch:
+                batch.add_column(sa.Column("tenant_id", sa.String(length=100), nullable=False, server_default="default"))
+                batch.create_index(f"ix_{table}_tenant_id", ["tenant_id"], unique=False)
+            # Keep server_default on SQLite (dropping defaults requires table rebuild).
+        else:
+            op.add_column(table, sa.Column("tenant_id", sa.String(length=100), nullable=False, server_default="default"))
+            op.create_index(f"ix_{table}_tenant_id", table, ["tenant_id"], unique=False)
+
+    # Remove server defaults after backfill (non-SQLite)
+    if not is_sqlite:
+        for table in ["agents", "keys", "credentials", "status_lists", "audit_events"]:
+            op.alter_column(table, "tenant_id", server_default=None)
 
 
 def downgrade() -> None:
     for table in ["agents", "keys", "credentials", "status_lists", "audit_events"]:
-        op.drop_index(f"ix_{table}_tenant_id", table_name=table)
-        op.drop_column(table, "tenant_id")
+        bind = op.get_bind()
+        is_sqlite = bind is not None and bind.dialect.name == "sqlite"
+        if is_sqlite:
+            with op.batch_alter_table(table) as batch:
+                batch.drop_index(f"ix_{table}_tenant_id")
+                batch.drop_column("tenant_id")
+        else:
+            op.drop_index(f"ix_{table}_tenant_id", table_name=table)
+            op.drop_column(table, "tenant_id")
 
     op.drop_table("tenants")

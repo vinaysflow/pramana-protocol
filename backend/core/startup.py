@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import os
+from urllib.parse import urlparse
 
 from sqlalchemy import text
 
@@ -70,6 +71,17 @@ def init_db() -> None:
     if not ok:
         if _strict_migrations():
             raise RuntimeError("Database migrations failed (strict mode)")
+        # In Spaces/demo sqlite, a partial Alembic run can leave a broken schema
+        # (create_all won't add missing columns). Prefer wiping the sqlite file and recreating.
+        db_url = str(settings.database_url)
+        if settings.demo_mode and db_url.startswith("sqlite:////"):
+            try:
+                parsed = urlparse(db_url)
+                if parsed.path:
+                    os.remove(parsed.path)
+            except Exception:
+                pass
+
         Base.metadata.create_all(bind=engine)
         # Ensure /ready passes and future upgrades don't re-run create_table().
         _try_alembic_stamp_head()

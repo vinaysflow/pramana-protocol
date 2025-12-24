@@ -16,9 +16,23 @@ depends_on = None
 
 
 def upgrade() -> None:
-    op.add_column('keys', sa.Column('active', sa.Boolean(), nullable=False, server_default=sa.text('1')))
-    op.alter_column('keys', 'active', server_default=None)
+    bind = op.get_bind()
+    is_sqlite = bind is not None and bind.dialect.name == "sqlite"
+
+    if is_sqlite:
+        # SQLite requires batch mode; keep default to avoid rebuild-on-drop-default.
+        with op.batch_alter_table("keys") as batch:
+            batch.add_column(sa.Column("active", sa.Boolean(), nullable=False, server_default=sa.text("1")))
+    else:
+        op.add_column("keys", sa.Column("active", sa.Boolean(), nullable=False, server_default=sa.text("1")))
+        op.alter_column("keys", "active", server_default=None)
 
 
 def downgrade() -> None:
-    op.drop_column('keys', 'active')
+    bind = op.get_bind()
+    is_sqlite = bind is not None and bind.dialect.name == "sqlite"
+    if is_sqlite:
+        with op.batch_alter_table("keys") as batch:
+            batch.drop_column("active")
+    else:
+        op.drop_column("keys", "active")
