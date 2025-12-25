@@ -14,6 +14,9 @@ Portable AI agent identity using W3C DIDs + VCs with instant revocation.
 - Confirm `verify_before.verified=true` and `verify_after.reason=revoked`
 - For feedback: see `docs/guides/HF_REVIEWER_RUNBOOK.md`
 
+### One-API (Stripe-like) developer quickstart
+See `docs/guides/REQUIREMENT_INTENTS.md` for the `RequirementIntent` flow (create → confirm → retrieve) that returns a **decision** and optional **proof bundle**.
+
 ### What’s implemented
 - did:web issuer creation + DID document hosting (Ed25519)
 - VC issuance (VC-JOSE/JWT, EdDSA)
