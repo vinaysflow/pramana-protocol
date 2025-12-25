@@ -5,5 +5,6 @@ from .credential import Credential
 from .status_list import StatusList
 from .audit_event import AuditEvent
 from .tenant import Tenant
+from .requirement_intent import RequirementIntent
 
-__all__ = ["Base", "Tenant", "Agent", "Key", "Credential", "StatusList", "AuditEvent"]
+__all__ = ["Base", "Tenant", "Agent", "Key", "Credential", "StatusList", "AuditEvent", "RequirementIntent"]
