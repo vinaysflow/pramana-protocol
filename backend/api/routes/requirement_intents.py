@@ -201,6 +201,12 @@ def confirm_intent(
     idem = _idempotency_key(request)
     req_hash = _hash_payload({"tenant_id": tenant_id, "body": req.model_dump(), "intent_id": str(intent_id)})
 
+    # Extract fields we need before the session is closed (SQLAlchemy expires on commit).
+    issuer_name: str
+    subject_name: str
+    subject_did: Optional[str]
+    items: list[dict[str, Any]]
+
     with db_session() as db:
         intent = (
             db.query(RequirementIntent)
@@ -224,6 +230,12 @@ def confirm_intent(
                 proof_bundle=intent.proof_bundle or {},
             )
 
+        issuer_name = intent.issuer_name or "issuer-agent"
+        subject_name = intent.subject_name or "subject-agent"
+        subject_did = intent.subject_did
+        raw_items = (intent.requirements or {}).get("items") or []
+        items = [x for x in raw_items if isinstance(x, dict)]
+
         # Mark processing
         intent.status = "processing"
         intent.confirm_idempotency_key = idem
@@ -233,15 +245,11 @@ def confirm_intent(
         db.commit()
 
     # Build fresh issuer + subject (demo-friendly)
-    issuer_name = intent.issuer_name or "issuer-agent"
-    subject_name = intent.subject_name or "subject-agent"
     issuer, _issuer_key = _create_agent(tenant_id=tenant_id, name=issuer_name)
     subject, _subject_key = _create_agent(tenant_id=tenant_id, name=subject_name)
-    subject_did = intent.subject_did or subject.did
+    subject_did = subject_did or subject.did
 
     # For v0: issue one VC per requirement
-    items = (intent.requirements or {}).get("items") or []
-
     issued: list[dict[str, Any]] = []
     per_req: list[dict[str, Any]] = []
     for r in items:

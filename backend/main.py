@@ -44,9 +44,15 @@ async def _request_id_middleware(request: Request, call_next):
     except HTTPException as e:
         # Let the exception handler format this.
         raise e
-    except Exception:
+    except Exception as e:
         # Always return structured error with request id (no tracebacks).
-        return JSONResponse(status_code=500, content={"error": "internal_error", "request_id": rid}, headers={"x-request-id": rid})
+        body = {"error": "internal_error", "request_id": rid}
+        # In demo mode, include a short message + exception type for faster iteration.
+        if settings.demo_mode:
+            body["type"] = e.__class__.__name__
+            msg = str(e)
+            body["message"] = msg[:300] if isinstance(msg, str) else "error"
+        return JSONResponse(status_code=500, content=body, headers={"x-request-id": rid})
 
     response.headers["x-request-id"] = rid
     return response
