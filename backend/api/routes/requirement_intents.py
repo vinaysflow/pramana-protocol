@@ -111,7 +111,7 @@ def create_intent(
             subject_name=req.subject_name,
             requirements={"items": [r.model_dump() for r in req.requirements]},
             options=req.options or {},
-            metadata=req.metadata or {},
+            metadata_json=req.metadata or {},
             idempotency_key=idem,
             request_hash=req_hash,
             decision={},

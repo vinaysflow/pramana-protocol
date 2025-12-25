@@ -25,7 +25,8 @@ class RequirementIntent(Base):
     subject_name: Mapped[Optional[str]] = mapped_column(String(200), nullable=True)
     requirements: Mapped[dict[str, Any]] = mapped_column(JSON, nullable=False, default=dict)
     options: Mapped[dict[str, Any]] = mapped_column(JSON, nullable=False, default=dict)
-    metadata: Mapped[dict[str, Any]] = mapped_column(JSON, nullable=False, default=dict)
+    # "metadata" is reserved by SQLAlchemy Declarative (Base.metadata). Store as metadata_json but keep DB column name.
+    metadata_json: Mapped[dict[str, Any]] = mapped_column("metadata", JSON, nullable=False, default=dict)
 
     # Idempotency
     idempotency_key: Mapped[Optional[str]] = mapped_column(String(200), nullable=True, index=True)
