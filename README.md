@@ -12,10 +12,11 @@ Portable AI agent identity using W3C DIDs + VCs with instant revocation.
 - Open `/demo`
 - Click **Run Drift Demo**
 - Confirm `verify_before.verified=true` and `verify_after.reason=revoked`
-- For feedback: see `docs/guides/HF_REVIEWER_RUNBOOK.md`
+- For feedback: https://huggingface.co/spaces/aurviaglobal/pramana-demo/discussions
 
 ### One-API (Stripe-like) developer quickstart
 See `docs/guides/REQUIREMENT_INTENTS.md` for the `RequirementIntent` flow (create → confirm → retrieve) that returns a **decision** and optional **proof bundle**.
+Start here: docs/guides/REQUIREMENT_INTENTS.md
 
 ### What’s implemented
 - did:web issuer creation + DID document hosting (Ed25519)
