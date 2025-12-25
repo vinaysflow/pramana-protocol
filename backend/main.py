@@ -102,7 +102,10 @@ def _add_demo_mode_ui_overrides(app: FastAPI) -> None:
             target = f"{target}?{request.url.query}"
         return RedirectResponse(url=target, status_code=307)
 
+    # Redirect both with and without trailing slash.
+    app.add_api_route("/login", _to_demo, methods=["GET", "HEAD"], include_in_schema=False)
     app.add_api_route("/login/", _to_demo, methods=["GET", "HEAD"], include_in_schema=False)
+    app.add_api_route("/auth/callback", _to_demo, methods=["GET", "HEAD"], include_in_schema=False)
     app.add_api_route("/auth/callback/", _to_demo, methods=["GET", "HEAD"], include_in_schema=False)
 
 if settings.cors_enabled:
