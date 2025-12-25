@@ -32,6 +32,8 @@ ENV DEMO_MODE=1
 ENV AUTH_MODE=oidc
 ENV PRAMANA_SCHEME=http
 ENV DATABASE_URL=sqlite:////tmp/pramana.db
+ENV ENV=dev
+ENV MIGRATIONS_STRICT=0
 
 # Hugging Face Spaces provides $PORT
 EXPOSE 7860
