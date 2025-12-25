@@ -90,6 +90,21 @@ def _add_ui_trailing_slash_redirects(app: FastAPI) -> None:
 
         app.add_api_route(path, _redir, methods=["GET", "HEAD"], include_in_schema=False)
 
+def _add_demo_mode_ui_overrides(app: FastAPI) -> None:
+    # In HF demo mode there is no Keycloak. Protect users from the /login page even if
+    # an older cached UI build still links to it.
+    if not settings.demo_mode:
+        return
+
+    async def _to_demo(request: Request):
+        target = "/demo/"
+        if request.url.query:
+            target = f"{target}?{request.url.query}"
+        return RedirectResponse(url=target, status_code=307)
+
+    app.add_api_route("/login/", _to_demo, methods=["GET", "HEAD"], include_in_schema=False)
+    app.add_api_route("/auth/callback/", _to_demo, methods=["GET", "HEAD"], include_in_schema=False)
+
 if settings.cors_enabled:
     app.add_middleware(
         CORSMiddleware,
@@ -173,4 +188,5 @@ async def api_root():
 
 # Mount UI last so API routes take precedence.
 _add_ui_trailing_slash_redirects(app)
+_add_demo_mode_ui_overrides(app)
 mount_ui(app)
