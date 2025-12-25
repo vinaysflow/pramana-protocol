@@ -15,6 +15,7 @@ from api.routes.dids import router as dids_router
 from api.routes.revoke import router as revoke_router
 from api.routes.status import router as status_router
 from api.routes.verify import router as verify_router
+from api.routes.requirement_intents import router as requirement_intents_router
 from api.routes.static_ui import mount_ui
 from core.settings import settings
 from core.startup import init_db
@@ -107,6 +108,7 @@ app.include_router(auth_router)
 app.include_router(workflows_router)
 app.include_router(keys_router)
 app.include_router(demo_router)
+app.include_router(requirement_intents_router)
 
 
 @app.on_event("startup")
