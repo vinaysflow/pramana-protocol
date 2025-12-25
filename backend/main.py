@@ -1,6 +1,6 @@
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import RedirectResponse
+from fastapi.responses import JSONResponse, RedirectResponse
 from api.middleware.limits import MaxBodySizeMiddleware
 from api.middleware.rate_limit import SimpleRateLimitMiddleware
 
@@ -24,6 +24,42 @@ app = FastAPI(
     description="Portable AI Agent Identity using W3C Standards",
     version="0.1.0",
 )
+
+def _get_request_id(request: Request) -> str:
+    rid = request.headers.get("x-request-id") or request.headers.get("X-Request-ID")
+    if isinstance(rid, str) and rid.strip():
+        return rid.strip()
+    import uuid
+
+    return uuid.uuid4().hex[:12]
+
+
+@app.middleware("http")
+async def _request_id_middleware(request: Request, call_next):
+    rid = _get_request_id(request)
+    request.state.request_id = rid
+    try:
+        response = await call_next(request)
+    except HTTPException as e:
+        # Let the exception handler format this.
+        raise e
+    except Exception:
+        # Always return structured error with request id (no tracebacks).
+        return JSONResponse(status_code=500, content={"error": "internal_error", "request_id": rid}, headers={"x-request-id": rid})
+
+    response.headers["x-request-id"] = rid
+    return response
+
+
+@app.exception_handler(HTTPException)
+async def _http_exception_handler(request: Request, exc: HTTPException):
+    rid = getattr(request.state, "request_id", None) or _get_request_id(request)
+    detail = exc.detail
+    if isinstance(detail, dict):
+        body = {**detail, "request_id": rid}
+    else:
+        body = {"error": str(detail), "request_id": rid}
+    return JSONResponse(status_code=exc.status_code, content=body, headers={"x-request-id": rid})
 
 def _add_ui_trailing_slash_redirects(app: FastAPI) -> None:
     # Next static export serves routes as /route/index.html. Ensure /route redirects to /route/

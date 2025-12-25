@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { apiBase, apiPost, getAccessToken, setAccessToken } from "../../lib/api";
+import { apiBase, apiPost, clearAccessToken, getAccessToken, setAccessToken } from "../../lib/api";
 
 type DemoSessionResp = {
   token: string;
@@ -87,7 +87,24 @@ export default function DemoPage() {
       setTenantId(resp.tenant_id || tenantId);
       setStatus("Done");
     } catch (e: any) {
-      setError(String(e?.message || e));
+      const msg = String(e?.message || e);
+      // If token expired/invalid, clear + re-create a session and retry once.
+      if (msg.includes("401") || msg.toLowerCase().includes("invalid token")) {
+        try {
+          clearAccessToken();
+          await ensureSession();
+          const resp = await apiPost<DriftResp>("/v1/workflows/drift-demo", {});
+          setResult(resp);
+          setTenantId(resp.tenant_id || tenantId);
+          setStatus("Done");
+          return;
+        } catch (e2: any) {
+          setError(String(e2?.message || e2));
+          setStatus("Failed");
+          return;
+        }
+      }
+      setError(msg);
       setStatus("Failed");
     }
   }
@@ -126,6 +143,17 @@ export default function DemoPage() {
       <h1>Guided Demo</h1>
       <p>
         This demo creates an isolated tenant for your session, issues a VC, verifies it, revokes it, then verifies again.
+      </p>
+      <p style={{ marginTop: 8 }}>
+        <b>Give feedback:</b>{" "}
+        <a
+          href="https://huggingface.co/spaces/aurviaglobal/pramana-demo/discussions"
+          target="_blank"
+          rel="noreferrer"
+        >
+          Space Community
+        </a>{" "}
+        (please include any <code>request_id</code> shown in errors)
       </p>
 
       <div style={{ display: "grid", gap: 6, marginTop: 12 }}>

@@ -3,7 +3,7 @@ from __future__ import annotations
 import uuid
 from datetime import datetime
 
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, Request
 from typing import Optional
 
 from pydantic import BaseModel, Field
@@ -24,10 +24,10 @@ from core.status_list_vc import (
 )
 from core.tenancy import ensure_tenant
 from core.vc import issue_vc_jwt, verify_vc_jwt
+from core.demo_metrics import inc, timer
 from models import Agent, Credential, Key
 
 import httpx
-import traceback
 
 router = APIRouter(prefix="/v1/workflows", tags=["workflows"])
 
@@ -109,9 +109,17 @@ def _verify_with_status(token: str) -> dict:
     response_model=DriftDemoResponse,
     dependencies=[Depends(require_scopes(["agents:create", "credentials:issue", "credentials:revoke"]))],
 )
-def drift_demo(req: DriftDemoRequest, auth: dict = Depends(require_scopes(["agents:create", "credentials:issue", "credentials:revoke"]))):
+def drift_demo(
+    req: DriftDemoRequest,
+    request: Request,
+    auth: dict = Depends(require_scopes(["agents:create", "credentials:issue", "credentials:revoke"])),
+):
+    if settings.demo_mode:
+        inc("drift_demo_started_total", 1)
+
     try:
-        tenant_id = auth.get("tenant_id", "default")
+        with timer("drift_demo_latency_ms"):
+            tenant_id = auth.get("tenant_id", "default")
 
         # Create issuer + subject agents
         issuer, issuer_key, _ = _create_agent(tenant_id=tenant_id, name=req.issuer_name)
@@ -178,6 +186,9 @@ def drift_demo(req: DriftDemoRequest, auth: dict = Depends(require_scopes(["agen
 
         verify_after = _verify_with_status(token)
 
+        if settings.demo_mode:
+            inc("drift_demo_success_total", 1)
+
         return DriftDemoResponse(
             tenant_id=tenant_id,
             issuer_agent_id=issuer.id,
@@ -193,15 +204,8 @@ def drift_demo(req: DriftDemoRequest, auth: dict = Depends(require_scopes(["agen
             revoke=revoke,
             verify_after=verify_after,
         )
-    except Exception as e:
-        # In HF demo mode we prefer actionable errors to opaque 500s.
+    except Exception:
         if settings.demo_mode:
-            raise HTTPException(
-                status_code=500,
-                detail={
-                    "error": str(e),
-                    "type": e.__class__.__name__,
-                    "traceback": traceback.format_exc(),
-                },
-            )
+            inc("drift_demo_error_total", 1)
         raise
+

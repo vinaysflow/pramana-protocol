@@ -22,6 +22,25 @@ function authHeaders(): Record<string, string> {
   return t ? { Authorization: `Bearer ${t}` } : {};
 }
 
+async function formatError(res: Response): Promise<string> {
+  const rid = res.headers.get("x-request-id") || res.headers.get("X-Request-ID") || "";
+  const ct = res.headers.get("content-type") || "";
+  const text = await res.text();
+
+  if (ct.includes("application/json")) {
+    try {
+      const data = JSON.parse(text);
+      const msg = typeof data?.error === "string" ? data.error : text;
+      const reqId = typeof data?.request_id === "string" ? data.request_id : rid;
+      return reqId ? `${msg} (request_id=${reqId})` : msg;
+    } catch {
+      // fall through
+    }
+  }
+
+  return rid ? `${text} (request_id=${rid})` : text;
+}
+
 export async function apiPost<T>(path: string, body: unknown): Promise<T> {
   const base = apiBase();
   const res = await fetch(`${base}${path}`, {
@@ -30,8 +49,8 @@ export async function apiPost<T>(path: string, body: unknown): Promise<T> {
     body: JSON.stringify(body),
   });
   if (!res.ok) {
-    const text = await res.text();
-    throw new Error(`${res.status} ${res.statusText}: ${text}`);
+    const msg = await formatError(res);
+    throw new Error(`${res.status} ${res.statusText}: ${msg}`);
   }
   return (await res.json()) as T;
 }
@@ -43,8 +62,8 @@ export async function apiGet<T>(path: string): Promise<T> {
     headers: { ...authHeaders() },
   });
   if (!res.ok) {
-    const text = await res.text();
-    throw new Error(`${res.status} ${res.statusText}: ${text}`);
+    const msg = await formatError(res);
+    throw new Error(`${res.status} ${res.statusText}: ${msg}`);
   }
   return (await res.json()) as T;
 }

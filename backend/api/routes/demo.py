@@ -2,11 +2,12 @@ from __future__ import annotations
 
 import secrets
 
-from fastapi import APIRouter, Response, Depends
+from fastapi import APIRouter, Response, Depends, HTTPException
 from pydantic import BaseModel
 
 from api.middleware.authz import require_scopes
 from core.auth.demo import issue_demo_token
+from core.demo_metrics import inc, snapshot
 from core.settings import settings
 
 router = APIRouter(prefix='/v1/demo', tags=['demo'])
@@ -29,6 +30,8 @@ def demo_session(resp: Response):
     tenant_id = f"demo_{session_id}"
 
     token, exp = issue_demo_token(tenant_id=tenant_id, ttl_seconds=settings.demo_token_ttl_seconds)
+    if settings.demo_mode:
+        inc("demo_session_created_total", 1)
 
     resp.set_cookie(
         key='pramana_demo_session',
@@ -45,6 +48,8 @@ def demo_session(resp: Response):
 @router.post('/reset')
 def demo_reset(auth: dict = Depends(require_scopes(['tenant:admin']))):
     tenant_id = auth.get('tenant_id', 'default')
+    if settings.demo_mode:
+        inc("demo_reset_total", 1)
 
     from core.db import db_session
     from models import Agent, AuditEvent, Credential, Key, StatusList
@@ -61,3 +66,10 @@ def demo_reset(auth: dict = Depends(require_scopes(['tenant:admin']))):
         db.commit()
 
     return {"reset": True, "tenant_id": tenant_id}
+
+
+@router.get("/metrics")
+def demo_metrics():
+    if not settings.demo_mode:
+        raise HTTPException(status_code=404, detail="Not found")
+    return snapshot()
