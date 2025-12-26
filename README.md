@@ -8,6 +8,12 @@ pinned: false
 
 Portable AI agent identity using W3C DIDs + VCs with instant revocation.
 
+### Links
+- Live demo: https://aurviaglobal-pramana-demo.hf.space/demo
+- One‑API docs: docs/guides/REQUIREMENT_INTENTS.md
+- Feedback (HF): https://huggingface.co/spaces/aurviaglobal/pramana-demo/discussions
+- Feedback (GitHub): https://github.com/vinaysflow/pramana-protocol/discussions
+
 ### HF reviewer quickstart (60 seconds)
 - Open `/demo`
 - Click **Run Drift Demo**
