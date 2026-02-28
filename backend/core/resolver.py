@@ -48,10 +48,6 @@ def _resolve_local_did(did: str) -> dict[str, Any] | None:
         agent = db.query(Agent).filter(Agent.did == did).one_or_none()
         if agent is None:
             return None
-    with db_session() as db:
-        agent = db.query(Agent).filter(Agent.did == did).one_or_none()
-        if agent is None:
-            return None
         keys = (
             db.query(Key)
             .filter(Key.agent_id == agent.id)

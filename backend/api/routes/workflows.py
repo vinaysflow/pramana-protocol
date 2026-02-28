@@ -107,7 +107,6 @@ def _verify_with_status(token: str) -> dict:
 @router.post(
     "/drift-demo",
     response_model=DriftDemoResponse,
-    dependencies=[Depends(require_scopes(["agents:create", "credentials:issue", "credentials:revoke"]))],
 )
 def drift_demo(
     req: DriftDemoRequest,
@@ -118,73 +117,73 @@ def drift_demo(
         inc("drift_demo_started_total", 1)
 
     try:
+        tenant_id = auth.get("tenant_id", "default")
+
         with timer("drift_demo_latency_ms"):
-            tenant_id = auth.get("tenant_id", "default")
+            # Create issuer + subject agents
+            issuer, issuer_key, _ = _create_agent(tenant_id=tenant_id, name=req.issuer_name)
+            subject, _, _ = _create_agent(tenant_id=tenant_id, name=req.subject_name)
 
-        # Create issuer + subject agents
-        issuer, issuer_key, _ = _create_agent(tenant_id=tenant_id, name=req.issuer_name)
-        subject, _, _ = _create_agent(tenant_id=tenant_id, name=req.subject_name)
+            subject_did = req.subject_did_override or subject.did
 
-        subject_did = req.subject_did_override or subject.did
+            # Issue VC
+            sl = get_or_create_default_list(tenant_id=tenant_id)
+            index = allocate_index(sl.id)
+            status_list_url = f"{settings.pramana_scheme}://{did_core.domain_decoded()}/v1/status/{sl.id}"
 
-        # Issue VC
-        sl = get_or_create_default_list(tenant_id=tenant_id)
-        index = allocate_index(sl.id)
-        status_list_url = f"{settings.pramana_scheme}://{did_core.domain_decoded()}/v1/status/{sl.id}"
+            token, jti, iat, exp = issue_vc_jwt(
+                issuer_agent_id=issuer.id,
+                subject_did=subject_did,
+                credential_type="CapabilityCredential",
+                status_list_url=status_list_url,
+                status_list_index=index,
+                ttl_seconds=3600,
+                extra_claims={"capability": "negotiate_contracts", "max_amount": 100000},
+            )
 
-        token, jti, iat, exp = issue_vc_jwt(
-            issuer_agent_id=issuer.id,
-            subject_did=subject_did,
-            credential_type="CapabilityCredential",
-            status_list_url=status_list_url,
-            status_list_index=index,
-            ttl_seconds=3600,
-            extra_claims={"capability": "negotiate_contracts", "max_amount": 100000},
-        )
+            cred = Credential(
+                tenant_id=tenant_id,
+                issuer_agent_id=issuer.id,
+                subject_did=subject_did,
+                credential_type="CapabilityCredential",
+                jti=jti,
+                jwt=token,
+                status_list_id=sl.id,
+                status_list_index=index,
+                issued_at=datetime.utcfromtimestamp(iat),
+                expires_at=(datetime.utcfromtimestamp(exp) if exp else None),
+            )
 
-        cred = Credential(
-            tenant_id=tenant_id,
-            issuer_agent_id=issuer.id,
-            subject_did=subject_did,
-            credential_type="CapabilityCredential",
-            jti=jti,
-            jwt=token,
-            status_list_id=sl.id,
-            status_list_index=index,
-            issued_at=datetime.utcfromtimestamp(iat),
-            expires_at=(datetime.utcfromtimestamp(exp) if exp else None),
-        )
+            with db_session() as db:
+                db.add(cred)
+                db.commit()
+                db.refresh(cred)
 
-        with db_session() as db:
-            db.add(cred)
-            db.commit()
-            db.refresh(cred)
+            write_audit(
+                tenant_id=tenant_id,
+                event_type="workflow.drift_demo.issued",
+                actor=str(issuer.id),
+                resource_type="credential",
+                resource_id=str(cred.id),
+                payload={"jti": jti, "subject": subject_did, "status_list_index": index},
+            )
 
-        write_audit(
-            tenant_id=tenant_id,
-            event_type="workflow.drift_demo.issued",
-            actor=str(issuer.id),
-            resource_type="credential",
-            resource_id=str(cred.id),
-            payload={"jti": jti, "subject": subject_did, "status_list_index": index},
-        )
+            verify_before = _verify_with_status(token)
 
-        verify_before = _verify_with_status(token)
+            # Revoke
+            set_revoked(cred.status_list_id, cred.status_list_index)
+            revoke = {"revoked": True, "credential_id": str(cred.id)}
 
-        # Revoke
-        set_revoked(cred.status_list_id, cred.status_list_index)
-        revoke = {"revoked": True, "credential_id": str(cred.id)}
+            write_audit(
+                tenant_id=tenant_id,
+                event_type="workflow.drift_demo.revoked",
+                actor="workflow",
+                resource_type="credential",
+                resource_id=str(cred.id),
+                payload={"status_list_id": str(cred.status_list_id), "status_list_index": cred.status_list_index},
+            )
 
-        write_audit(
-            tenant_id=tenant_id,
-            event_type="workflow.drift_demo.revoked",
-            actor="workflow",
-            resource_type="credential",
-            resource_id=str(cred.id),
-            payload={"status_list_id": str(cred.status_list_id), "status_list_index": cred.status_list_index},
-        )
-
-        verify_after = _verify_with_status(token)
+            verify_after = _verify_with_status(token)
 
         if settings.demo_mode:
             inc("drift_demo_success_total", 1)

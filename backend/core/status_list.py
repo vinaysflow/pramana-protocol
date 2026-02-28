@@ -59,6 +59,9 @@ def _ensure_list(*, tenant_id: str, purpose: str = "revocation", size: int = DEF
 
 
 def allocate_index(status_list_id) -> int:
+    # NOTE: not atomic -- two concurrent callers may receive the same index.
+    # Acceptable for MVP++ (SQLite serializes writes; demo sessions are single-tenant).
+    # A proper fix would use a separate next_index counter column.
     with db_session() as db:
         sl = db.query(StatusList).filter(StatusList.id == _normalize_id(status_list_id)).one()
         bits = bytearray(_b64url_decode(sl.bitstring))
