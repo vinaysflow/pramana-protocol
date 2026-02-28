@@ -16,10 +16,8 @@ pytest
 ### Docker (compose) backend tests
 
 ```bash
-cd /Users/vinaytripathi/Documents/pramana-protocol
-# Ensure stack is up
+# from the repo root
 docker-compose up -d
-# Run tests inside backend container
 docker-compose exec backend pytest -q
 ```
 

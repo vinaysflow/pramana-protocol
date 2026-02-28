@@ -10,7 +10,7 @@
 ### Local dev (OIDC)
 
 ```bash
-cd /Users/vinaytripathi/Documents/pramana-protocol
+# from the repo root after cloning
 make dev
 ```
 

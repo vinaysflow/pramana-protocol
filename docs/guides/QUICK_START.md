@@ -3,7 +3,8 @@
 ### 1) Configure env
 
 ```bash
-cd /Users/vinaytripathi/Documents/pramana-protocol
+# from the repo root after cloning
+cd Pramana-protocol
 cp .env.example .env
 python3 scripts/set_env_secret.py
 ```

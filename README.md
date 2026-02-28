@@ -35,12 +35,16 @@ Start here: docs/guides/REQUIREMENT_INTENTS.md
 - Audit trail (tenant-scoped)
 - Guided demo UI at `/demo`
 
+### Before first run
+
+Copy `.env.example` to `.env` and set **`API_SECRET_KEY`** to a strong, unique value (min 32 chars). For Hugging Face Spaces, also set **`DEMO_JWT_SECRET`** in your Space secrets. Never commit real secrets to the repository.
+
 ---
 
 ## Local dev (Keycloak OIDC)
 
 ```bash
-cd /Users/vinaytripathi/Documents/pramana-protocol
+# from the repo root after cloning
 make dev
 ```
 
@@ -83,7 +87,7 @@ Then open `http://127.0.0.1:7860/demo`.
 ## Portable verifier (no DB)
 
 ```bash
-cd /Users/vinaytripathi/Documents/pramana-protocol/backend
+cd backend
 . .venv/bin/activate
 python tools/verifier_cli.py --jwt "<VC_JWT>"
 ```
