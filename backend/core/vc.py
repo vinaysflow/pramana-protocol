@@ -6,15 +6,69 @@ from typing import Any, Optional
 
 import jwt
 from cryptography.hazmat.primitives import serialization
+from cryptography.hazmat.primitives.asymmetric.ec import EllipticCurvePublicKey
+from cryptography.hazmat.primitives.asymmetric.rsa import RSAPublicKey
+from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PublicKey
 
 from core.crypto import decrypt_text
 from core.did import public_key_from_jwk
 from core.db import db_session
 from models import Agent, Key
 
+# Algorithms accepted for VC/SVID verification.
+# EdDSA = Pramana-issued VCs; RS256/ES256/ES384 = SPIFFE SVIDs and external JWTs.
+_SUPPORTED_ALGORITHMS = ["EdDSA", "RS256", "PS256", "ES256", "ES384", "ES512"]
+
 
 def _now() -> int:
     return int(time.time())
+
+
+def _public_key_from_jwk_multi(jwk: dict[str, Any]):
+    """Load a public key from a JWK. Supports OKP (Ed25519), EC (P-256/P-384/P-521), and RSA."""
+    kty = jwk.get("kty")
+
+    if kty == "OKP":
+        # Ed25519 — existing implementation
+        return public_key_from_jwk(jwk)
+
+    if kty == "EC":
+        from cryptography.hazmat.primitives.asymmetric.ec import (
+            EllipticCurvePublicNumbers,
+            SECP256R1, SECP384R1, SECP521R1,
+        )
+        import base64 as _b64
+
+        crv = jwk.get("crv", "")
+        curve_map = {"P-256": SECP256R1(), "P-384": SECP384R1(), "P-521": SECP521R1()}
+        curve = curve_map.get(crv)
+        if curve is None:
+            raise ValueError(f"Unsupported EC curve: {crv!r}")
+
+        def _decode(s: str) -> int:
+            padded = s + "=" * ((4 - len(s) % 4) % 4)
+            return int.from_bytes(_b64.urlsafe_b64decode(padded), "big")
+
+        x_int = _decode(jwk["x"])
+        y_int = _decode(jwk["y"])
+        pub_nums = EllipticCurvePublicNumbers(x=x_int, y=y_int, curve=curve)
+        return pub_nums.public_key()
+
+    if kty == "RSA":
+        from cryptography.hazmat.primitives.asymmetric.rsa import (
+            RSAPublicNumbers,
+        )
+        import base64 as _b64
+
+        def _decode_int(s: str) -> int:
+            padded = s + "=" * ((4 - len(s) % 4) % 4)
+            return int.from_bytes(_b64.urlsafe_b64decode(padded), "big")
+
+        n_int = _decode_int(jwk["n"])
+        e_int = _decode_int(jwk["e"])
+        return RSAPublicNumbers(e=e_int, n=n_int).public_key()
+
+    raise ValueError(f"Unsupported JWK kty: {kty!r}")
 
 
 def issue_vc_jwt(
@@ -58,7 +112,6 @@ def issue_vc_jwt(
     }
 
     if extra_claims:
-        # merge into credentialSubject for MVP
         cs = vc.get("credentialSubject") or {}
         cs.update(extra_claims)
         vc["credentialSubject"] = cs
@@ -78,9 +131,19 @@ def issue_vc_jwt(
 
 
 def verify_vc_jwt(*, token: str, resolve_did_document: Any, status_check: Any) -> dict[str, Any]:
-    # decode header to find kid -> issuer DID
+    """Verify a VC-JWT or SPIFFE SVID JWT.
+
+    Supports EdDSA (Ed25519), RS256/PS256 (RSA), ES256/ES384/ES512 (ECDSA).
+    The algorithm is read from the JWT header; no algorithm is assumed.
+    """
+    # decode header to find kid and algorithm
     header = jwt.get_unverified_header(token)
     kid = header.get("kid")
+    alg = header.get("alg", "EdDSA")
+
+    if alg not in _SUPPORTED_ALGORITHMS:
+        raise ValueError(f"Unsupported JWT algorithm: {alg!r}. Supported: {_SUPPORTED_ALGORITHMS}")
+
     decoded = jwt.decode(token, options={"verify_signature": False})
 
     issuer = decoded.get("iss")
@@ -89,7 +152,7 @@ def verify_vc_jwt(*, token: str, resolve_did_document: Any, status_check: Any) -
 
     did_doc = resolve_did_document(issuer)
 
-    # find verification method with matching kid (fallback first)
+    # find verification method with matching kid (fallback to first)
     vms = did_doc.get("verificationMethod") or []
     vm = None
     if kid:
@@ -104,11 +167,23 @@ def verify_vc_jwt(*, token: str, resolve_did_document: Any, status_check: Any) -
         raise ValueError("No verification method")
 
     jwk = vm.get("publicKeyJwk")
-    pub = public_key_from_jwk(jwk)
+    pub = _public_key_from_jwk_multi(jwk)
 
-    payload = jwt.decode(token, key=pub, algorithms=["EdDSA"], options={"require": ["iss", "sub", "iat", "jti"]})
+    # For EdDSA, require standard VC claims. For SVID JWTs, only require iss+sub.
+    if alg == "EdDSA":
+        required_claims = ["iss", "sub", "iat", "jti"]
+    else:
+        # SPIFFE SVIDs require iss, sub, exp, aud — be permissive on jti/iat
+        required_claims = ["iss", "sub"]
 
-    # status check
+    payload = jwt.decode(
+        token,
+        key=pub,
+        algorithms=[alg],
+        options={"require": required_claims},
+    )
+
+    # status check (may not be present in SVIDs)
     vc = payload.get("vc") or {}
     cs = vc.get("credentialStatus") or {}
     status_list_cred = cs.get("statusListCredential")

@@ -1,0 +1,360 @@
+{
+  "agents": {
+    "acme-certification-authority": {
+      "verification": "not_applicable",
+      "role": "issuer"
+    },
+    "global-commerce-registry": {
+      "verification": "not_applicable",
+      "role": "issuer"
+    },
+    "india-upi-authority": {
+      "verification": "not_applicable",
+      "role": "issuer"
+    },
+    "defi-trust-oracle": {
+      "verification": "not_applicable",
+      "role": "issuer"
+    },
+    "healthcare-compliance-org": {
+      "verification": "not_applicable",
+      "role": "issuer"
+    },
+    "amazon-electronics": {
+      "credential_verification": "success",
+      "role": "merchant"
+    },
+    "flipkart-fashion": {
+      "credential_verification": "success",
+      "role": "merchant"
+    },
+    "bigbasket-groceries": {
+      "credential_verification": "success",
+      "role": "merchant"
+    },
+    "kindle-books": {
+      "credential_verification": "success",
+      "role": "merchant"
+    },
+    "makemytrip-travel": {
+      "credential_verification": "success",
+      "role": "merchant"
+    },
+    "aws-cloud": {
+      "credential_verification": "success",
+      "role": "merchant"
+    },
+    "freshworks-saas": {
+      "credential_verification": "success",
+      "role": "merchant"
+    },
+    "urban-company-services": {
+      "credential_verification": "success",
+      "role": "merchant"
+    },
+    "ondc-local-grocery": {
+      "credential_verification": "success",
+      "role": "merchant"
+    },
+    "ondc-local-pharmacy": {
+      "credential_verification": "success",
+      "role": "merchant"
+    },
+    "personal-shopper-basic": {
+      "credential_verification": "success",
+      "delegation_verification": "success",
+      "delegation_depth": 1,
+      "effective_actions": [
+        "purchase"
+      ],
+      "max_amount": 5000,
+      "expected_trust_score_range": [
+        55,
+        75
+      ]
+    },
+    "personal-shopper-premium": {
+      "credential_verification": "success",
+      "delegation_verification": "success",
+      "delegation_depth": 1,
+      "effective_actions": [
+        "purchase",
+        "negotiate"
+      ],
+      "max_amount": 50000,
+      "expected_trust_score_range": [
+        55,
+        75
+      ]
+    },
+    "personal-shopper-unlimited": {
+      "credential_verification": "success",
+      "delegation_verification": "success",
+      "delegation_depth": 1,
+      "effective_actions": [
+        "purchase",
+        "negotiate",
+        "subscribe"
+      ],
+      "max_amount": 999999,
+      "expected_trust_score_range": [
+        55,
+        75
+      ]
+    },
+    "personal-shopper-india": {
+      "credential_verification": "success",
+      "delegation_verification": "success",
+      "delegation_depth": 1,
+      "effective_actions": [
+        "purchase"
+      ],
+      "max_amount": 200000,
+      "expected_trust_score_range": [
+        55,
+        75
+      ]
+    },
+    "personal-shopper-electronics": {
+      "credential_verification": "success",
+      "delegation_verification": "success",
+      "delegation_depth": 1,
+      "effective_actions": [
+        "purchase"
+      ],
+      "max_amount": 100000,
+      "expected_trust_score_range": [
+        55,
+        75
+      ]
+    },
+    "corp-procurement-small": {
+      "credential_verification": "success",
+      "delegation_verification": "success",
+      "delegation_depth": 1,
+      "effective_actions": [
+        "purchase",
+        "negotiate"
+      ],
+      "max_amount": 100000,
+      "expected_trust_score_range": [
+        55,
+        75
+      ]
+    },
+    "corp-procurement-large": {
+      "credential_verification": "success",
+      "delegation_verification": "success",
+      "delegation_depth": 1,
+      "effective_actions": [
+        "purchase",
+        "negotiate",
+        "contract"
+      ],
+      "max_amount": 5000000,
+      "expected_trust_score_range": [
+        55,
+        75
+      ]
+    },
+    "corp-procurement-cloud": {
+      "credential_verification": "success",
+      "delegation_verification": "success",
+      "delegation_depth": 1,
+      "effective_actions": [
+        "purchase",
+        "subscribe"
+      ],
+      "max_amount": 1000000,
+      "expected_trust_score_range": [
+        55,
+        75
+      ]
+    },
+    "corp-procurement-restricted": {
+      "credential_verification": "success",
+      "delegation_verification": "success",
+      "delegation_depth": 1,
+      "effective_actions": [
+        "purchase"
+      ],
+      "max_amount": 50000,
+      "expected_trust_score_range": [
+        55,
+        75
+      ]
+    },
+    "corp-procurement-india": {
+      "credential_verification": "success",
+      "delegation_verification": "success",
+      "delegation_depth": 1,
+      "effective_actions": [
+        "purchase"
+      ],
+      "max_amount": 500000,
+      "expected_trust_score_range": [
+        55,
+        75
+      ]
+    },
+    "comparison-agent-1": {
+      "credential_verification": "success",
+      "delegation_verification": "success",
+      "delegation_depth": 1,
+      "effective_actions": [
+        "view",
+        "compare"
+      ],
+      "max_amount": 0,
+      "expected_trust_score_range": [
+        55,
+        75
+      ]
+    },
+    "comparison-agent-2": {
+      "credential_verification": "success",
+      "delegation_verification": "success",
+      "delegation_depth": 1,
+      "effective_actions": [
+        "view",
+        "compare"
+      ],
+      "max_amount": 0,
+      "expected_trust_score_range": [
+        55,
+        75
+      ]
+    },
+    "comparison-agent-3": {
+      "credential_verification": "success",
+      "delegation_verification": "success",
+      "delegation_depth": 1,
+      "effective_actions": [
+        "view"
+      ],
+      "max_amount": 0,
+      "expected_trust_score_range": [
+        55,
+        75
+      ]
+    },
+    "subscription-manager-1": {
+      "credential_verification": "success",
+      "delegation_verification": "success",
+      "delegation_depth": 1,
+      "effective_actions": [
+        "subscribe",
+        "cancel"
+      ],
+      "max_amount": 10000,
+      "expected_trust_score_range": [
+        55,
+        75
+      ]
+    },
+    "subscription-manager-2": {
+      "credential_verification": "success",
+      "delegation_verification": "success",
+      "delegation_depth": 1,
+      "effective_actions": [
+        "subscribe"
+      ],
+      "max_amount": 50000,
+      "expected_trust_score_range": [
+        55,
+        75
+      ]
+    },
+    "customer-support-1": {
+      "credential_verification": "success",
+      "role": "service_agent"
+    },
+    "customer-support-2": {
+      "credential_verification": "success",
+      "role": "service_agent"
+    },
+    "customer-support-3": {
+      "credential_verification": "success",
+      "role": "service_agent"
+    },
+    "compliance-monitoring-1": {
+      "credential_verification": "success",
+      "role": "service_agent"
+    },
+    "compliance-monitoring-2": {
+      "credential_verification": "success",
+      "role": "service_agent"
+    },
+    "data-analysis-1": {
+      "credential_verification": "success",
+      "role": "service_agent"
+    },
+    "data-analysis-2": {
+      "credential_verification": "success",
+      "role": "service_agent"
+    },
+    "workflow-automation-1": {
+      "credential_verification": "success",
+      "role": "service_agent"
+    },
+    "workflow-automation-2": {
+      "credential_verification": "success",
+      "role": "service_agent"
+    },
+    "workflow-automation-3": {
+      "credential_verification": "success",
+      "role": "service_agent"
+    },
+    "expired-credential-agent": {
+      "credential_verification": "failure",
+      "failure_reason": "expired",
+      "expected_trust_score_range": [
+        0,
+        25
+      ]
+    },
+    "revoked-credential-agent": {
+      "requires_server_revocation": true,
+      "status_list_index": "see_credential"
+    },
+    "no-credential-agent": {
+      "credential_verification": "no_credential",
+      "failure_reason": "no credential to verify"
+    },
+    "wrong-key-agent": {
+      "credential_verification": "failure",
+      "failure_reason": "signature_invalid"
+    },
+    "deep-delegation-agent": {
+      "delegation_verification": "failure",
+      "failure_reason": "depth_exceeded"
+    },
+    "escalated-privileges-agent": {
+      "delegation_should_fail": true,
+      "error_type": "ScopeEscalationError"
+    },
+    "expired-parent-agent": {
+      "delegation_verification": "failure",
+      "failure_reason": "parent_expired"
+    },
+    "self-signed-agent": {
+      "credential_verification": "success",
+      "expected_trust_score_range": [
+        20,
+        50
+      ]
+    },
+    "future-dated-agent": {
+      "credential_verification": "failure",
+      "failure_reason": "immature_signature"
+    },
+    "massive-scope-agent": {
+      "credential_verification": "success",
+      "delegation_verification": "success",
+      "expected_trust_score_range": [
+        20,
+        50
+      ]
+    }
+  }
+}

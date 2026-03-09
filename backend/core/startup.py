@@ -88,3 +88,26 @@ def init_db() -> None:
 
     with engine.connect() as conn:
         conn.execute(text("SELECT 1"))
+
+    # Warm JTI dedup cache from DB so replay protection survives restarts
+    try:
+        from core.jti_dedup import warm_jti_cache
+        warm_jti_cache()
+    except Exception:
+        import logging as _logging
+        _logging.getLogger(__name__).debug("JTI cache warm skipped", exc_info=True)
+
+    if settings.demo_mode and settings.demo_auto_seed:
+        try:
+            from core.seed import seed_tenant
+            import logging as _logging
+            _log = _logging.getLogger(__name__)
+            result = seed_tenant("default", settings.demo_seed_profile)
+            if result.agents > 0:
+                _log.info(
+                    "Auto-seeded: %d agents, %d credentials, %d audit events",
+                    result.agents, result.credentials, result.audit_events,
+                )
+        except Exception:
+            import logging as _logging
+            _logging.getLogger(__name__).warning("Auto-seed failed", exc_info=True)

@@ -47,12 +47,15 @@ def verify(req: VerifyRequest):
 
         result = verify_vc_jwt(token=req.jwt, resolve_did_document=resolve_did, status_check=status_check)
 
+        jti = str(result["payload"].get("jti", ""))
+        exp = result["payload"].get("exp")
+
         write_audit(
             tenant_id="public",
             event_type="credential.verified",
             actor="verifier",
             resource_type="credential",
-            resource_id=str(result["payload"].get("jti", "")),
+            resource_id=jti,
             payload={"iss": result["payload"].get("iss"), "sub": result["payload"].get("sub"), "status": result["status"]},
         )
 
@@ -61,5 +64,7 @@ def verify(req: VerifyRequest):
 
         return {"verified": True, **result}
 
+    except HTTPException:
+        raise
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))

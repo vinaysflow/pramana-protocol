@@ -17,4 +17,6 @@ class StatusList(Base):
     purpose: Mapped[str] = mapped_column(String(50), nullable=False, default="revocation")
     bitstring: Mapped[str] = mapped_column(String, nullable=False)
     size: Mapped[int] = mapped_column(Integer, nullable=False, default=16384)
+    # Atomic next-available-index counter — updated with atomic SQL to prevent races
+    next_index: Mapped[int] = mapped_column(Integer, nullable=False, default=0)
     updated_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=datetime.utcnow, nullable=False)

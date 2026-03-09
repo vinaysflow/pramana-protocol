@@ -1,10 +1,37 @@
 [project]
-name = "pramana"
-version = "0.1.0"
-description = "Pramana Protocol SDK (Python)"
+name = "pramana-sdk"
+version = "0.2.0"
+description = "Zero-Trust AI Agent Identity — W3C DIDs, Verifiable Credentials, and AP2 Commerce for autonomous agents"
+readme = "README.md"
+license = { text = "MIT" }
 requires-python = ">=3.9"
-dependencies = ["httpx>=0.26.0"]
+authors = [{ name = "Pramana Protocol" }]
+keywords = ["ai-agents", "did", "verifiable-credentials", "zero-trust", "identity", "spiffe"]
+classifiers = [
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Security :: Cryptography",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Intended Audience :: Developers",
+]
+dependencies = [
+    "cryptography>=43",
+    "PyJWT[crypto]>=2.8",
+    "httpx>=0.27",
+]
+
+[project.urls]
+Homepage = "https://github.com/vinaysflow/pramana-protocol"
+Documentation = "https://pramana.dev/docs"
+Repository = "https://github.com/vinaysflow/pramana-protocol"
+
+[project.optional-dependencies]
+dev = ["pytest", "pytest-asyncio", "httpx"]
 
 [build-system]
-requires = ["setuptools>=68"]
+requires = ["setuptools>=68", "wheel"]
 build-backend = "setuptools.build_meta"

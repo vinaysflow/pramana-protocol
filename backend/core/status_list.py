@@ -4,7 +4,7 @@ import base64
 import uuid
 from datetime import datetime
 
-from sqlalchemy import select
+from sqlalchemy import select, update
 
 from core.db import db_session
 from models import StatusList
@@ -59,19 +59,31 @@ def _ensure_list(*, tenant_id: str, purpose: str = "revocation", size: int = DEF
 
 
 def allocate_index(status_list_id) -> int:
-    # NOTE: not atomic -- two concurrent callers may receive the same index.
-    # Acceptable for MVP++ (SQLite serializes writes; demo sessions are single-tenant).
-    # A proper fix would use a separate next_index counter column.
+    """Atomically reserve the next available status list index.
+
+    Uses an UPDATE ... RETURNING pattern (or equivalent) so that concurrent
+    callers always receive distinct indices — no linear scan, no race condition.
+    """
+    norm_id = _normalize_id(status_list_id)
     with db_session() as db:
-        sl = db.query(StatusList).filter(StatusList.id == _normalize_id(status_list_id)).one()
-        bits = bytearray(_b64url_decode(sl.bitstring))
-        for i in range(sl.size):
-            byte_i = i // 8
-            bit_i = i % 8
-            mask = 1 << bit_i
-            if (bits[byte_i] & mask) == 0:
-                return i
-        raise ValueError("Status list is full")
+        # Atomic increment: fetch-and-increment next_index in a single statement.
+        # SQLite serializes writes so this is safe there too.
+        stmt = (
+            update(StatusList)
+            .where(StatusList.id == norm_id)
+            .values(next_index=StatusList.next_index + 1, updated_at=datetime.utcnow())
+            .returning(StatusList.next_index, StatusList.size)
+        )
+        row = db.execute(stmt).fetchone()
+        if row is None:
+            raise ValueError(f"Status list {status_list_id} not found")
+        # next_index is the NEW value (post-increment), so the allocated slot is new_val - 1
+        allocated = row[0] - 1
+        size = row[1]
+        if allocated >= size:
+            raise ValueError("Status list is full")
+        db.commit()
+        return allocated
 
 
 def set_revoked(status_list_id, index: int) -> None:

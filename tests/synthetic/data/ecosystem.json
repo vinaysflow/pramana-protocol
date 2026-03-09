@@ -1,0 +1,1129 @@
+{
+  "generated_at": "2026-03-08T17:32:56Z",
+  "agents": [
+    {
+      "index": 1,
+      "name": "acme-certification-authority",
+      "role": "issuer",
+      "did": "did:key:z6MkoAHv6R3Te5dFXTqBiQAV693EcCxBQqSfChxtXUtMEXUJ",
+      "identity_dict": {
+        "did": "did:key:z6MkoAHv6R3Te5dFXTqBiQAV693EcCxBQqSfChxtXUtMEXUJ",
+        "method": "key",
+        "name": "acme-certification-authority",
+        "private_key_pem": "-----BEGIN PRIVATE KEY-----\nMC4CAQAwBQYDK2VwBCIEID3qsQiHbiWMbkNcykM5HGUM6VtNDed7gKalKNQn2U/R\n-----END PRIVATE KEY-----\n",
+        "domain": null
+      },
+      "credentials_issued": [
+        "b9b356ec-027b-48a1-a71f-49e828de03f1",
+        "4d49d736-2e02-4a5f-ba0f-4a8e07842546",
+        "48206025-5cd3-4c01-bdcd-738a3868a8d6",
+        "c7e54939-9760-4cbd-9915-2085b7a19eb0",
+        "06039da4-6488-42c4-aa1a-696b2a244fa2",
+        "f5ee994f-6787-4356-87eb-221afaa11cbf",
+        "f3438e17-22e8-4bd0-80dd-776ab6baff45",
+        "72b2047c-a713-499a-b5b6-d4890f8faa66",
+        "d0fe331b-3c92-43db-a43d-6c5aa854e208",
+        "cefcb462-c113-469e-b564-9ce9e7c63224"
+      ],
+      "credentials_held": []
+    },
+    {
+      "index": 2,
+      "name": "global-commerce-registry",
+      "role": "issuer",
+      "did": "did:key:z6Mkrs8Kc63qH8ZyWKijQv7H5k7mFqjKbyJqvrb2mBVkkV4V",
+      "identity_dict": {
+        "did": "did:key:z6Mkrs8Kc63qH8ZyWKijQv7H5k7mFqjKbyJqvrb2mBVkkV4V",
+        "method": "key",
+        "name": "global-commerce-registry",
+        "private_key_pem": "-----BEGIN PRIVATE KEY-----\nMC4CAQAwBQYDK2VwBCIEIO2aELJDyJZ4YMfP5hOwclYIJajcHIk6zZALMZHYior4\n-----END PRIVATE KEY-----\n",
+        "domain": null
+      },
+      "credentials_issued": [
+        "203789fe-a5b8-42d7-8d74-a984f0fcb9bf",
+        "5649c841-a9e8-41c9-8585-5ed796ecac7b",
+        "da5f65ff-5a1f-4e87-8ab5-e42a579589b9",
+        "a51f2482-3b93-4ed4-8e24-6428c5836c4d",
+        "944daa47-14f7-463a-b03d-f3266e0c9423",
+        "152475cd-e922-4850-b8e3-90cd66aa5eb5",
+        "eb9a3192-2f50-4cae-8ac2-8ba6dcc52efd",
+        "8c9edbd7-2238-4c22-866e-3daf10b49e5a",
+        "e9f26759-2907-498f-99b6-400566714fce",
+        "0cabe919-ca9a-4bbe-94c9-adcfcc24f61d"
+      ],
+      "credentials_held": []
+    },
+    {
+      "index": 3,
+      "name": "india-upi-authority",
+      "role": "issuer",
+      "did": "did:key:z6MkmoUkrqJnbU3TNQBPJdopigU2ZtRVcbvFxao9zP3fNcgM",
+      "identity_dict": {
+        "did": "did:key:z6MkmoUkrqJnbU3TNQBPJdopigU2ZtRVcbvFxao9zP3fNcgM",
+        "method": "key",
+        "name": "india-upi-authority",
+        "private_key_pem": "-----BEGIN PRIVATE KEY-----\nMC4CAQAwBQYDK2VwBCIEIE4vuvzWuG77tv+zJ741Ryi/GttDBWM+sAVTLp3BSqvN\n-----END PRIVATE KEY-----\n",
+        "domain": null
+      },
+      "credentials_issued": [],
+      "credentials_held": []
+    },
+    {
+      "index": 4,
+      "name": "defi-trust-oracle",
+      "role": "issuer",
+      "did": "did:key:z6MkeaCJ5b2VUXAACeF5Gy1fvakZs5SToJNHoqTkc8m6XkyU",
+      "identity_dict": {
+        "did": "did:key:z6MkeaCJ5b2VUXAACeF5Gy1fvakZs5SToJNHoqTkc8m6XkyU",
+        "method": "key",
+        "name": "defi-trust-oracle",
+        "private_key_pem": "-----BEGIN PRIVATE KEY-----\nMC4CAQAwBQYDK2VwBCIEIP4F+o6roaxXhOMRK2ABUAiK7Rr7XAbbqIMTOtQM4gmM\n-----END PRIVATE KEY-----\n",
+        "domain": null
+      },
+      "credentials_issued": [],
+      "credentials_held": []
+    },
+    {
+      "index": 5,
+      "name": "healthcare-compliance-org",
+      "role": "issuer",
+      "did": "did:key:z6MkvUjBJz7ARpQUsWbX1fSHhbqMZk19RS7XhDqhmukDCH11",
+      "identity_dict": {
+        "did": "did:key:z6MkvUjBJz7ARpQUsWbX1fSHhbqMZk19RS7XhDqhmukDCH11",
+        "method": "key",
+        "name": "healthcare-compliance-org",
+        "private_key_pem": "-----BEGIN PRIVATE KEY-----\nMC4CAQAwBQYDK2VwBCIEIFQDJ/s9y78ZWVJFFLRwoMNvETNVT0UgRC/KmxPHRLgJ\n-----END PRIVATE KEY-----\n",
+        "domain": null
+      },
+      "credentials_issued": [],
+      "credentials_held": []
+    },
+    {
+      "index": 6,
+      "name": "amazon-electronics",
+      "role": "merchant",
+      "did": "did:key:z6MkoMSYGq6vZj4vzRBFTshS4LY4SLBamHNpgZn3Vfqdvf7b",
+      "identity_dict": {
+        "did": "did:key:z6MkoMSYGq6vZj4vzRBFTshS4LY4SLBamHNpgZn3Vfqdvf7b",
+        "method": "key",
+        "name": "amazon-electronics",
+        "private_key_pem": "-----BEGIN PRIVATE KEY-----\nMC4CAQAwBQYDK2VwBCIEIPOty4gNioB/uQfvPWxqn0Uw66y+7dYKE1/bd37iYF7n\n-----END PRIVATE KEY-----\n",
+        "domain": null
+      },
+      "credentials_issued": [],
+      "credentials_held": [
+        "203789fe-a5b8-42d7-8d74-a984f0fcb9bf"
+      ]
+    },
+    {
+      "index": 7,
+      "name": "flipkart-fashion",
+      "role": "merchant",
+      "did": "did:key:z6MkoVCc9LPWS3dAeP8y5U9D1CMxMb7GxwQLc3sc6WRm5J3r",
+      "identity_dict": {
+        "did": "did:key:z6MkoVCc9LPWS3dAeP8y5U9D1CMxMb7GxwQLc3sc6WRm5J3r",
+        "method": "key",
+        "name": "flipkart-fashion",
+        "private_key_pem": "-----BEGIN PRIVATE KEY-----\nMC4CAQAwBQYDK2VwBCIEIHhf3klQD+tcuQ2hf6z31F96ouztJb0EP96QH6h5BiHK\n-----END PRIVATE KEY-----\n",
+        "domain": null
+      },
+      "credentials_issued": [],
+      "credentials_held": [
+        "5649c841-a9e8-41c9-8585-5ed796ecac7b"
+      ]
+    },
+    {
+      "index": 8,
+      "name": "bigbasket-groceries",
+      "role": "merchant",
+      "did": "did:key:z6MktcZx4kBPwt9m5Q3fwG5eQ77qjbDHMjQX8F7r2axkEezf",
+      "identity_dict": {
+        "did": "did:key:z6MktcZx4kBPwt9m5Q3fwG5eQ77qjbDHMjQX8F7r2axkEezf",
+        "method": "key",
+        "name": "bigbasket-groceries",
+        "private_key_pem": "-----BEGIN PRIVATE KEY-----\nMC4CAQAwBQYDK2VwBCIEIDvQxatsEVMKaSlcNPUiYEAfxFnE6hwAhuSuSvXa04bu\n-----END PRIVATE KEY-----\n",
+        "domain": null
+      },
+      "credentials_issued": [],
+      "credentials_held": [
+        "da5f65ff-5a1f-4e87-8ab5-e42a579589b9"
+      ]
+    },
+    {
+      "index": 9,
+      "name": "kindle-books",
+      "role": "merchant",
+      "did": "did:key:z6MkmUbuzK26HZfiTxHPHnCUV5AjgxNTLQ97VTDLD3Bb7ox8",
+      "identity_dict": {
+        "did": "did:key:z6MkmUbuzK26HZfiTxHPHnCUV5AjgxNTLQ97VTDLD3Bb7ox8",
+        "method": "key",
+        "name": "kindle-books",
+        "private_key_pem": "-----BEGIN PRIVATE KEY-----\nMC4CAQAwBQYDK2VwBCIEIIhgPKyA3iRB8UaZ4Gao/zB/FaYjxIJf6Y3+nycC1g3i\n-----END PRIVATE KEY-----\n",
+        "domain": null
+      },
+      "credentials_issued": [],
+      "credentials_held": [
+        "a51f2482-3b93-4ed4-8e24-6428c5836c4d"
+      ]
+    },
+    {
+      "index": 10,
+      "name": "makemytrip-travel",
+      "role": "merchant",
+      "did": "did:key:z6Mkn6uBbpBdhx5gr1n9VgUWrNdSeJ3YFWZ3JJJxM7go6oju",
+      "identity_dict": {
+        "did": "did:key:z6Mkn6uBbpBdhx5gr1n9VgUWrNdSeJ3YFWZ3JJJxM7go6oju",
+        "method": "key",
+        "name": "makemytrip-travel",
+        "private_key_pem": "-----BEGIN PRIVATE KEY-----\nMC4CAQAwBQYDK2VwBCIEILAMmMNmR3jTxLcnuFrgmW33dPLSEzRAbiHv2UPCSGsT\n-----END PRIVATE KEY-----\n",
+        "domain": null
+      },
+      "credentials_issued": [],
+      "credentials_held": [
+        "944daa47-14f7-463a-b03d-f3266e0c9423"
+      ]
+    },
+    {
+      "index": 11,
+      "name": "aws-cloud",
+      "role": "merchant",
+      "did": "did:key:z6Mkji1shX34aCBBE858mvQHAtdbBMas4z5ee1Yo9onRBkdY",
+      "identity_dict": {
+        "did": "did:key:z6Mkji1shX34aCBBE858mvQHAtdbBMas4z5ee1Yo9onRBkdY",
+        "method": "key",
+        "name": "aws-cloud",
+        "private_key_pem": "-----BEGIN PRIVATE KEY-----\nMC4CAQAwBQYDK2VwBCIEIIqXUknfQ2lQQCvYMvSw+IfubZSifxcMLXzFnulxPgFp\n-----END PRIVATE KEY-----\n",
+        "domain": null
+      },
+      "credentials_issued": [],
+      "credentials_held": [
+        "152475cd-e922-4850-b8e3-90cd66aa5eb5"
+      ]
+    },
+    {
+      "index": 12,
+      "name": "freshworks-saas",
+      "role": "merchant",
+      "did": "did:key:z6Mkjg1AmBqW5FFY3S3B8MvvVpkRFW1JBBm39KFLBtMiUMYR",
+      "identity_dict": {
+        "did": "did:key:z6Mkjg1AmBqW5FFY3S3B8MvvVpkRFW1JBBm39KFLBtMiUMYR",
+        "method": "key",
+        "name": "freshworks-saas",
+        "private_key_pem": "-----BEGIN PRIVATE KEY-----\nMC4CAQAwBQYDK2VwBCIEIDfadxnSGYz9ndaVMvvT+7/+MLJNAmQAl7dM5Ek40chW\n-----END PRIVATE KEY-----\n",
+        "domain": null
+      },
+      "credentials_issued": [],
+      "credentials_held": [
+        "eb9a3192-2f50-4cae-8ac2-8ba6dcc52efd"
+      ]
+    },
+    {
+      "index": 13,
+      "name": "urban-company-services",
+      "role": "merchant",
+      "did": "did:key:z6MkntZgUimpqALB5jXmz5up2wU5TVtdBoW6Ef9WF4LH5do6",
+      "identity_dict": {
+        "did": "did:key:z6MkntZgUimpqALB5jXmz5up2wU5TVtdBoW6Ef9WF4LH5do6",
+        "method": "key",
+        "name": "urban-company-services",
+        "private_key_pem": "-----BEGIN PRIVATE KEY-----\nMC4CAQAwBQYDK2VwBCIEIIJA+8867p4y+wFXZG81ICb4HCVNzQoQBUGnGEuB7JMj\n-----END PRIVATE KEY-----\n",
+        "domain": null
+      },
+      "credentials_issued": [],
+      "credentials_held": [
+        "8c9edbd7-2238-4c22-866e-3daf10b49e5a"
+      ]
+    },
+    {
+      "index": 14,
+      "name": "ondc-local-grocery",
+      "role": "merchant",
+      "did": "did:key:z6Mkh8fre1Dsei1VdhjBcNjVdCzHGxJMFH7WazKhj9tyxEHz",
+      "identity_dict": {
+        "did": "did:key:z6Mkh8fre1Dsei1VdhjBcNjVdCzHGxJMFH7WazKhj9tyxEHz",
+        "method": "key",
+        "name": "ondc-local-grocery",
+        "private_key_pem": "-----BEGIN PRIVATE KEY-----\nMC4CAQAwBQYDK2VwBCIEIJX2W+mI7bXItCuyKB8Hf/+bRQMFEX+VBDyIevnUb6ZN\n-----END PRIVATE KEY-----\n",
+        "domain": null
+      },
+      "credentials_issued": [],
+      "credentials_held": [
+        "e9f26759-2907-498f-99b6-400566714fce"
+      ]
+    },
+    {
+      "index": 15,
+      "name": "ondc-local-pharmacy",
+      "role": "merchant",
+      "did": "did:key:z6MkvbLBLRnevYerz5VyTjW8sK8KjcgWvKvu5UfVidBNT21g",
+      "identity_dict": {
+        "did": "did:key:z6MkvbLBLRnevYerz5VyTjW8sK8KjcgWvKvu5UfVidBNT21g",
+        "method": "key",
+        "name": "ondc-local-pharmacy",
+        "private_key_pem": "-----BEGIN PRIVATE KEY-----\nMC4CAQAwBQYDK2VwBCIEIEZc7chCFu+dxCrZ510w54V6CIsLptyykDYNqlk+BFUH\n-----END PRIVATE KEY-----\n",
+        "domain": null
+      },
+      "credentials_issued": [],
+      "credentials_held": [
+        "0cabe919-ca9a-4bbe-94c9-adcfcc24f61d"
+      ]
+    },
+    {
+      "index": 16,
+      "name": "personal-shopper-basic",
+      "role": "shopping_agent",
+      "did": "did:key:z6MknUEeVEeLuYoPsHuoqS5fVfzqQ6zpxGYP7NtfzjSZtamx",
+      "identity_dict": {
+        "did": "did:key:z6MknUEeVEeLuYoPsHuoqS5fVfzqQ6zpxGYP7NtfzjSZtamx",
+        "method": "key",
+        "name": "personal-shopper-basic",
+        "private_key_pem": "-----BEGIN PRIVATE KEY-----\nMC4CAQAwBQYDK2VwBCIEIMB61+kdzNWjOgOAh8sEJUyxKfxPYNg284nv6rTyUook\n-----END PRIVATE KEY-----\n",
+        "domain": null
+      },
+      "credentials_issued": [],
+      "credentials_held": [
+        "2e471fad-22e2-4eeb-ba2f-19ca7257d86a"
+      ]
+    },
+    {
+      "index": 17,
+      "name": "user-personal-shopper-basic",
+      "role": "user",
+      "did": "did:key:z6MkgzgsgnUTKfcuiNePVqUW7D7oUWGbww4d6mPoxY9sMmuj",
+      "identity_dict": {
+        "did": "did:key:z6MkgzgsgnUTKfcuiNePVqUW7D7oUWGbww4d6mPoxY9sMmuj",
+        "method": "key",
+        "name": "user-personal-shopper-basic",
+        "private_key_pem": "-----BEGIN PRIVATE KEY-----\nMC4CAQAwBQYDK2VwBCIEINp098A4QscrWdJR6sXfFYKCTTODsAl0Klapqi0fqzGU\n-----END PRIVATE KEY-----\n",
+        "domain": null
+      },
+      "credentials_issued": [
+        "2e471fad-22e2-4eeb-ba2f-19ca7257d86a"
+      ],
+      "credentials_held": []
+    },
+    {
+      "index": 18,
+      "name": "personal-shopper-premium",
+      "role": "shopping_agent",
+      "did": "did:key:z6MkuSVjeiEfR6ot5ypPAahu8QHTaBiTrxvfheuzFzgj9GuH",
+      "identity_dict": {
+        "did": "did:key:z6MkuSVjeiEfR6ot5ypPAahu8QHTaBiTrxvfheuzFzgj9GuH",
+        "method": "key",
+        "name": "personal-shopper-premium",
+        "private_key_pem": "-----BEGIN PRIVATE KEY-----\nMC4CAQAwBQYDK2VwBCIEIFTONMPL2f4Rqf4xkb9Cno4I/w9h51J+L+ZkSQ3yxB9F\n-----END PRIVATE KEY-----\n",
+        "domain": null
+      },
+      "credentials_issued": [],
+      "credentials_held": [
+        "83b42bf8-96e2-48db-a6d0-85f680f99723"
+      ]
+    },
+    {
+      "index": 19,
+      "name": "user-personal-shopper-premium",
+      "role": "user",
+      "did": "did:key:z6Mkk1xknMXynhECcTXD5Bds85DYgdeGj26DM4MgLS836KmS",
+      "identity_dict": {
+        "did": "did:key:z6Mkk1xknMXynhECcTXD5Bds85DYgdeGj26DM4MgLS836KmS",
+        "method": "key",
+        "name": "user-personal-shopper-premium",
+        "private_key_pem": "-----BEGIN PRIVATE KEY-----\nMC4CAQAwBQYDK2VwBCIEIBPDla9qSwEPJWAXfbkpXXN2OnqRR0CKAwpUyqt2mGIC\n-----END PRIVATE KEY-----\n",
+        "domain": null
+      },
+      "credentials_issued": [
+        "83b42bf8-96e2-48db-a6d0-85f680f99723"
+      ],
+      "credentials_held": []
+    },
+    {
+      "index": 20,
+      "name": "personal-shopper-unlimited",
+      "role": "shopping_agent",
+      "did": "did:key:z6MkmvE5P695igNEe9RL4sxJbsB1WGpTEyVDqMCpC8n1zbfg",
+      "identity_dict": {
+        "did": "did:key:z6MkmvE5P695igNEe9RL4sxJbsB1WGpTEyVDqMCpC8n1zbfg",
+        "method": "key",
+        "name": "personal-shopper-unlimited",
+        "private_key_pem": "-----BEGIN PRIVATE KEY-----\nMC4CAQAwBQYDK2VwBCIEIKZdzTU2kf9luBlg2Jq5N79w0paWW5AXhAnzVEoGNV9a\n-----END PRIVATE KEY-----\n",
+        "domain": null
+      },
+      "credentials_issued": [],
+      "credentials_held": [
+        "e1998547-de08-4797-bb70-c9808a690aed"
+      ]
+    },
+    {
+      "index": 21,
+      "name": "user-personal-shopper-unlimited",
+      "role": "user",
+      "did": "did:key:z6Mki1bNt4Xd3eveo6iWo9UTKvjQnHKQGiqECbKGB5TsEbZX",
+      "identity_dict": {
+        "did": "did:key:z6Mki1bNt4Xd3eveo6iWo9UTKvjQnHKQGiqECbKGB5TsEbZX",
+        "method": "key",
+        "name": "user-personal-shopper-unlimited",
+        "private_key_pem": "-----BEGIN PRIVATE KEY-----\nMC4CAQAwBQYDK2VwBCIEIJ+a/Df5snKi97JDKBP+p0ddzBO4gOgx5Hsny3yJhaDc\n-----END PRIVATE KEY-----\n",
+        "domain": null
+      },
+      "credentials_issued": [
+        "e1998547-de08-4797-bb70-c9808a690aed"
+      ],
+      "credentials_held": []
+    },
+    {
+      "index": 22,
+      "name": "personal-shopper-india",
+      "role": "shopping_agent",
+      "did": "did:key:z6Mkkk2zyTE1umhKrDLPWP9i46ftu1NTGgQMRoMVWtV2vRMD",
+      "identity_dict": {
+        "did": "did:key:z6Mkkk2zyTE1umhKrDLPWP9i46ftu1NTGgQMRoMVWtV2vRMD",
+        "method": "key",
+        "name": "personal-shopper-india",
+        "private_key_pem": "-----BEGIN PRIVATE KEY-----\nMC4CAQAwBQYDK2VwBCIEIGX/T1g66xjvpDS7oDkeNvb3vUFNJrioVgPujx/x1Zls\n-----END PRIVATE KEY-----\n",
+        "domain": null
+      },
+      "credentials_issued": [],
+      "credentials_held": [
+        "a804a15c-58e1-44e6-8282-7b1a5aa20040"
+      ]
+    },
+    {
+      "index": 23,
+      "name": "user-personal-shopper-india",
+      "role": "user",
+      "did": "did:key:z6MkmchGAjRGQGFi9c8SysbPyNE3bwMfzsCVySEYKTJd6Zfx",
+      "identity_dict": {
+        "did": "did:key:z6MkmchGAjRGQGFi9c8SysbPyNE3bwMfzsCVySEYKTJd6Zfx",
+        "method": "key",
+        "name": "user-personal-shopper-india",
+        "private_key_pem": "-----BEGIN PRIVATE KEY-----\nMC4CAQAwBQYDK2VwBCIEICRCBW2aeb3uGdbILSKm+Q14wH5ljZsnbgY8DXnsZmmV\n-----END PRIVATE KEY-----\n",
+        "domain": null
+      },
+      "credentials_issued": [
+        "a804a15c-58e1-44e6-8282-7b1a5aa20040"
+      ],
+      "credentials_held": []
+    },
+    {
+      "index": 24,
+      "name": "personal-shopper-electronics",
+      "role": "shopping_agent",
+      "did": "did:key:z6MktBrfbk45tzxJjVFKqzgL1csSEkatU4VnBZ78xYayEpSq",
+      "identity_dict": {
+        "did": "did:key:z6MktBrfbk45tzxJjVFKqzgL1csSEkatU4VnBZ78xYayEpSq",
+        "method": "key",
+        "name": "personal-shopper-electronics",
+        "private_key_pem": "-----BEGIN PRIVATE KEY-----\nMC4CAQAwBQYDK2VwBCIEIIeseFe3017Wd0JS7/uaPNpsOC70bUmEP6eCLNf5hgGO\n-----END PRIVATE KEY-----\n",
+        "domain": null
+      },
+      "credentials_issued": [],
+      "credentials_held": [
+        "40155da1-1f0f-44e0-8046-b9e900a522b2"
+      ]
+    },
+    {
+      "index": 25,
+      "name": "user-personal-shopper-electronics",
+      "role": "user",
+      "did": "did:key:z6MkgHyZD7QyHzuDkCFvMaTVXQ1F1m6kW7kLFg5FKkx2Eo3j",
+      "identity_dict": {
+        "did": "did:key:z6MkgHyZD7QyHzuDkCFvMaTVXQ1F1m6kW7kLFg5FKkx2Eo3j",
+        "method": "key",
+        "name": "user-personal-shopper-electronics",
+        "private_key_pem": "-----BEGIN PRIVATE KEY-----\nMC4CAQAwBQYDK2VwBCIEIPaAVHEHds6vCrPohVYVCfToc7jDKkQaC5JUdH6bm/JX\n-----END PRIVATE KEY-----\n",
+        "domain": null
+      },
+      "credentials_issued": [
+        "40155da1-1f0f-44e0-8046-b9e900a522b2"
+      ],
+      "credentials_held": []
+    },
+    {
+      "index": 26,
+      "name": "corp-procurement-small",
+      "role": "shopping_agent",
+      "did": "did:key:z6MkmKJej7qD47xufHnuHv1wjH2TyC3xT3vsUsh3UzRWp1z5",
+      "identity_dict": {
+        "did": "did:key:z6MkmKJej7qD47xufHnuHv1wjH2TyC3xT3vsUsh3UzRWp1z5",
+        "method": "key",
+        "name": "corp-procurement-small",
+        "private_key_pem": "-----BEGIN PRIVATE KEY-----\nMC4CAQAwBQYDK2VwBCIEINNAYvmdaEUc3aZhQ7WiFR5Bi+fPpLu2R+s94oRVatxT\n-----END PRIVATE KEY-----\n",
+        "domain": null
+      },
+      "credentials_issued": [],
+      "credentials_held": [
+        "94024d40-ca03-44a3-9bb1-8488f19453d8"
+      ]
+    },
+    {
+      "index": 27,
+      "name": "user-corp-procurement-small",
+      "role": "user",
+      "did": "did:key:z6MkvjisRspaZQmYSiSUj5FP3UuMbxf2n5EsnyW1rdKvn7WF",
+      "identity_dict": {
+        "did": "did:key:z6MkvjisRspaZQmYSiSUj5FP3UuMbxf2n5EsnyW1rdKvn7WF",
+        "method": "key",
+        "name": "user-corp-procurement-small",
+        "private_key_pem": "-----BEGIN PRIVATE KEY-----\nMC4CAQAwBQYDK2VwBCIEIEs1rc8yTFup9A8nytjo5M7cVAPoliURUARvrVIKlCTt\n-----END PRIVATE KEY-----\n",
+        "domain": null
+      },
+      "credentials_issued": [
+        "94024d40-ca03-44a3-9bb1-8488f19453d8"
+      ],
+      "credentials_held": []
+    },
+    {
+      "index": 28,
+      "name": "corp-procurement-large",
+      "role": "shopping_agent",
+      "did": "did:key:z6Mkvc7M6xMoRnBrFXfgEMjFg5vry7u8vEawRYdMSFnhBkw1",
+      "identity_dict": {
+        "did": "did:key:z6Mkvc7M6xMoRnBrFXfgEMjFg5vry7u8vEawRYdMSFnhBkw1",
+        "method": "key",
+        "name": "corp-procurement-large",
+        "private_key_pem": "-----BEGIN PRIVATE KEY-----\nMC4CAQAwBQYDK2VwBCIEILpFT564PRg9qnCRof4yCfoPWkQED6X+avUb37n+RRZ8\n-----END PRIVATE KEY-----\n",
+        "domain": null
+      },
+      "credentials_issued": [],
+      "credentials_held": [
+        "8b28edf2-3891-485c-9e4e-2de8a199f86b"
+      ]
+    },
+    {
+      "index": 29,
+      "name": "user-corp-procurement-large",
+      "role": "user",
+      "did": "did:key:z6MkoZ7YAnPybva5RgtzdLF35Kxx2aT9Vs2rbcVwEx5RzmdM",
+      "identity_dict": {
+        "did": "did:key:z6MkoZ7YAnPybva5RgtzdLF35Kxx2aT9Vs2rbcVwEx5RzmdM",
+        "method": "key",
+        "name": "user-corp-procurement-large",
+        "private_key_pem": "-----BEGIN PRIVATE KEY-----\nMC4CAQAwBQYDK2VwBCIEIHqk95yloXD8xyef1ZVvGWvMrk0LH+bk4EqNyHtzSaj5\n-----END PRIVATE KEY-----\n",
+        "domain": null
+      },
+      "credentials_issued": [
+        "8b28edf2-3891-485c-9e4e-2de8a199f86b"
+      ],
+      "credentials_held": []
+    },
+    {
+      "index": 30,
+      "name": "corp-procurement-cloud",
+      "role": "shopping_agent",
+      "did": "did:key:z6MkoibkDmnzneN2ejwr9jj9vTjE9KSeCKhm1HMfF4Uu1PXc",
+      "identity_dict": {
+        "did": "did:key:z6MkoibkDmnzneN2ejwr9jj9vTjE9KSeCKhm1HMfF4Uu1PXc",
+        "method": "key",
+        "name": "corp-procurement-cloud",
+        "private_key_pem": "-----BEGIN PRIVATE KEY-----\nMC4CAQAwBQYDK2VwBCIEIJjLNuyDjeNivxFhbP6FprI+P1uSTTDQghmrboMJGXm3\n-----END PRIVATE KEY-----\n",
+        "domain": null
+      },
+      "credentials_issued": [],
+      "credentials_held": [
+        "bd8056ec-6a69-43da-8529-17c9c015ad2b"
+      ]
+    },
+    {
+      "index": 31,
+      "name": "user-corp-procurement-cloud",
+      "role": "user",
+      "did": "did:key:z6MksEgV98UA8BQSYuWcagfwje5DU1n3Rbn37aqLQ8ayqBNS",
+      "identity_dict": {
+        "did": "did:key:z6MksEgV98UA8BQSYuWcagfwje5DU1n3Rbn37aqLQ8ayqBNS",
+        "method": "key",
+        "name": "user-corp-procurement-cloud",
+        "private_key_pem": "-----BEGIN PRIVATE KEY-----\nMC4CAQAwBQYDK2VwBCIEIPvjFsewmlDUT4HT1jpj71QVyooZH/NlrMkBqr1Y1qf8\n-----END PRIVATE KEY-----\n",
+        "domain": null
+      },
+      "credentials_issued": [
+        "bd8056ec-6a69-43da-8529-17c9c015ad2b"
+      ],
+      "credentials_held": []
+    },
+    {
+      "index": 32,
+      "name": "corp-procurement-restricted",
+      "role": "shopping_agent",
+      "did": "did:key:z6MkktdQq2nvZTBimkFB6kCybfSPD1jo1pEcfLNsKMkRYTR1",
+      "identity_dict": {
+        "did": "did:key:z6MkktdQq2nvZTBimkFB6kCybfSPD1jo1pEcfLNsKMkRYTR1",
+        "method": "key",
+        "name": "corp-procurement-restricted",
+        "private_key_pem": "-----BEGIN PRIVATE KEY-----\nMC4CAQAwBQYDK2VwBCIEIDkwMdFdKKSKVcUtXInDusBLJBUMo6+ICvqo/yxOxFqg\n-----END PRIVATE KEY-----\n",
+        "domain": null
+      },
+      "credentials_issued": [],
+      "credentials_held": [
+        "af0f110e-661c-4816-91b6-140494c69f44"
+      ]
+    },
+    {
+      "index": 33,
+      "name": "user-corp-procurement-restricted",
+      "role": "user",
+      "did": "did:key:z6MkqDP9Gung2iuWTMHqGQUDoR3JCTpQHXdjn21qK93vwrqW",
+      "identity_dict": {
+        "did": "did:key:z6MkqDP9Gung2iuWTMHqGQUDoR3JCTpQHXdjn21qK93vwrqW",
+        "method": "key",
+        "name": "user-corp-procurement-restricted",
+        "private_key_pem": "-----BEGIN PRIVATE KEY-----\nMC4CAQAwBQYDK2VwBCIEIEqcBooDRQXxxIHi7que3wc7f2cpZUHO2Adgvp7agPJQ\n-----END PRIVATE KEY-----\n",
+        "domain": null
+      },
+      "credentials_issued": [
+        "af0f110e-661c-4816-91b6-140494c69f44"
+      ],
+      "credentials_held": []
+    },
+    {
+      "index": 34,
+      "name": "corp-procurement-india",
+      "role": "shopping_agent",
+      "did": "did:key:z6MkgN3nWiDzL7v8563vAqx4fLTm2TYcM99zadQoSRj4LzTs",
+      "identity_dict": {
+        "did": "did:key:z6MkgN3nWiDzL7v8563vAqx4fLTm2TYcM99zadQoSRj4LzTs",
+        "method": "key",
+        "name": "corp-procurement-india",
+        "private_key_pem": "-----BEGIN PRIVATE KEY-----\nMC4CAQAwBQYDK2VwBCIEIBiQH3ycL/Fq+k/lplHZSUibu1cz6LImY1//95ZeB0ZL\n-----END PRIVATE KEY-----\n",
+        "domain": null
+      },
+      "credentials_issued": [],
+      "credentials_held": [
+        "0f0561ae-a1d1-4588-8b85-d8398ef434ee"
+      ]
+    },
+    {
+      "index": 35,
+      "name": "user-corp-procurement-india",
+      "role": "user",
+      "did": "did:key:z6MktU3MCpDrNzZrFU34iow7612cHYr5uTTwJvHWiKkcSAaX",
+      "identity_dict": {
+        "did": "did:key:z6MktU3MCpDrNzZrFU34iow7612cHYr5uTTwJvHWiKkcSAaX",
+        "method": "key",
+        "name": "user-corp-procurement-india",
+        "private_key_pem": "-----BEGIN PRIVATE KEY-----\nMC4CAQAwBQYDK2VwBCIEIAzivPNciKHt9QUexGFVDL6dQcpHGZ0BrNvrgDUXyiTH\n-----END PRIVATE KEY-----\n",
+        "domain": null
+      },
+      "credentials_issued": [
+        "0f0561ae-a1d1-4588-8b85-d8398ef434ee"
+      ],
+      "credentials_held": []
+    },
+    {
+      "index": 36,
+      "name": "comparison-agent-1",
+      "role": "shopping_agent",
+      "did": "did:key:z6Mkq1YQ5wbcKvd6p2PLzpfb8CyTV3zjKQfrv7aGbaZfuzEV",
+      "identity_dict": {
+        "did": "did:key:z6Mkq1YQ5wbcKvd6p2PLzpfb8CyTV3zjKQfrv7aGbaZfuzEV",
+        "method": "key",
+        "name": "comparison-agent-1",
+        "private_key_pem": "-----BEGIN PRIVATE KEY-----\nMC4CAQAwBQYDK2VwBCIEINoxidV6HB+GdiiM91rlo4ygKm9MBSCXpSH7MQsKjzQD\n-----END PRIVATE KEY-----\n",
+        "domain": null
+      },
+      "credentials_issued": [],
+      "credentials_held": [
+        "246b1e78-56a8-4617-a464-fb78933f1538"
+      ]
+    },
+    {
+      "index": 37,
+      "name": "user-comparison-agent-1",
+      "role": "user",
+      "did": "did:key:z6Mko85tL13gmw6ZUeDw5zjrEa7GAQL9rCT3biy48x4fkvYC",
+      "identity_dict": {
+        "did": "did:key:z6Mko85tL13gmw6ZUeDw5zjrEa7GAQL9rCT3biy48x4fkvYC",
+        "method": "key",
+        "name": "user-comparison-agent-1",
+        "private_key_pem": "-----BEGIN PRIVATE KEY-----\nMC4CAQAwBQYDK2VwBCIEIFpiDZnshB1oSeXTnqDRw4I5kH1JaOv5YvYijUVdXBmn\n-----END PRIVATE KEY-----\n",
+        "domain": null
+      },
+      "credentials_issued": [
+        "246b1e78-56a8-4617-a464-fb78933f1538"
+      ],
+      "credentials_held": []
+    },
+    {
+      "index": 38,
+      "name": "comparison-agent-2",
+      "role": "shopping_agent",
+      "did": "did:key:z6MkibK7pDi9JuKdGBRDkEudN69HvbAJ8zX4gJUmnaSECsPE",
+      "identity_dict": {
+        "did": "did:key:z6MkibK7pDi9JuKdGBRDkEudN69HvbAJ8zX4gJUmnaSECsPE",
+        "method": "key",
+        "name": "comparison-agent-2",
+        "private_key_pem": "-----BEGIN PRIVATE KEY-----\nMC4CAQAwBQYDK2VwBCIEIGLkEz/nhaPU/IwahV9tUERoevZjM5uAZfzcFl71hhnK\n-----END PRIVATE KEY-----\n",
+        "domain": null
+      },
+      "credentials_issued": [],
+      "credentials_held": [
+        "cf532440-8451-43ee-92ae-2cf6a4d78bd5"
+      ]
+    },
+    {
+      "index": 39,
+      "name": "user-comparison-agent-2",
+      "role": "user",
+      "did": "did:key:z6MkqGEmaitTtcTdHWqARggV9vpjkLJVMobBsc1iFComZnRV",
+      "identity_dict": {
+        "did": "did:key:z6MkqGEmaitTtcTdHWqARggV9vpjkLJVMobBsc1iFComZnRV",
+        "method": "key",
+        "name": "user-comparison-agent-2",
+        "private_key_pem": "-----BEGIN PRIVATE KEY-----\nMC4CAQAwBQYDK2VwBCIEIJTaNpLNwtVYmB7aY7pwA8pqtM4Ty/t6h1kWPIB5DJ3A\n-----END PRIVATE KEY-----\n",
+        "domain": null
+      },
+      "credentials_issued": [
+        "cf532440-8451-43ee-92ae-2cf6a4d78bd5"
+      ],
+      "credentials_held": []
+    },
+    {
+      "index": 40,
+      "name": "comparison-agent-3",
+      "role": "shopping_agent",
+      "did": "did:key:z6MkwQBKybUVwaP5n1zH9SepSuFaVG3DahbFM9gtss58mw4k",
+      "identity_dict": {
+        "did": "did:key:z6MkwQBKybUVwaP5n1zH9SepSuFaVG3DahbFM9gtss58mw4k",
+        "method": "key",
+        "name": "comparison-agent-3",
+        "private_key_pem": "-----BEGIN PRIVATE KEY-----\nMC4CAQAwBQYDK2VwBCIEIGOOTGeirWPeFmPXU6snOTyoFqwBz+bRZWsMNQvVAqhF\n-----END PRIVATE KEY-----\n",
+        "domain": null
+      },
+      "credentials_issued": [],
+      "credentials_held": [
+        "948c15ef-4450-4aa0-aeed-b19e408fdc87"
+      ]
+    },
+    {
+      "index": 41,
+      "name": "user-comparison-agent-3",
+      "role": "user",
+      "did": "did:key:z6Mkw1LbYut92AMV8m8DSgM73o7RmB4mNaysqd35gyeeNvMC",
+      "identity_dict": {
+        "did": "did:key:z6Mkw1LbYut92AMV8m8DSgM73o7RmB4mNaysqd35gyeeNvMC",
+        "method": "key",
+        "name": "user-comparison-agent-3",
+        "private_key_pem": "-----BEGIN PRIVATE KEY-----\nMC4CAQAwBQYDK2VwBCIEIIyNPK3tEAyTX9/eYu8lG77klh/f3rKMc/2NwGDZzeFu\n-----END PRIVATE KEY-----\n",
+        "domain": null
+      },
+      "credentials_issued": [
+        "948c15ef-4450-4aa0-aeed-b19e408fdc87"
+      ],
+      "credentials_held": []
+    },
+    {
+      "index": 42,
+      "name": "subscription-manager-1",
+      "role": "shopping_agent",
+      "did": "did:key:z6MkiAp9DBjCZ4PjQ4GdaQTmM4EP58avhBEV9DZV1Xs1Gdpq",
+      "identity_dict": {
+        "did": "did:key:z6MkiAp9DBjCZ4PjQ4GdaQTmM4EP58avhBEV9DZV1Xs1Gdpq",
+        "method": "key",
+        "name": "subscription-manager-1",
+        "private_key_pem": "-----BEGIN PRIVATE KEY-----\nMC4CAQAwBQYDK2VwBCIEIJvYLugztGKX0oY5Uyq+LxTZNSBtYfpyObx/7RaGSM+V\n-----END PRIVATE KEY-----\n",
+        "domain": null
+      },
+      "credentials_issued": [],
+      "credentials_held": [
+        "fdcde16f-85dd-4ffd-a6fd-7cd6c234ad22"
+      ]
+    },
+    {
+      "index": 43,
+      "name": "user-subscription-manager-1",
+      "role": "user",
+      "did": "did:key:z6Mkt9TGpcBqpRfVKgnV1cymrtBa2UUfRbDDNpEYBwxwHWPG",
+      "identity_dict": {
+        "did": "did:key:z6Mkt9TGpcBqpRfVKgnV1cymrtBa2UUfRbDDNpEYBwxwHWPG",
+        "method": "key",
+        "name": "user-subscription-manager-1",
+        "private_key_pem": "-----BEGIN PRIVATE KEY-----\nMC4CAQAwBQYDK2VwBCIEIPhdYv6p6/nCAPu9lP8eQlOCfrLs2fegIMx6h5hHKi2z\n-----END PRIVATE KEY-----\n",
+        "domain": null
+      },
+      "credentials_issued": [
+        "fdcde16f-85dd-4ffd-a6fd-7cd6c234ad22"
+      ],
+      "credentials_held": []
+    },
+    {
+      "index": 44,
+      "name": "subscription-manager-2",
+      "role": "shopping_agent",
+      "did": "did:key:z6Mku4xiAuYZSAsZnv6i1DZDoenS29gfP6L6v1H7MdrVXZbv",
+      "identity_dict": {
+        "did": "did:key:z6Mku4xiAuYZSAsZnv6i1DZDoenS29gfP6L6v1H7MdrVXZbv",
+        "method": "key",
+        "name": "subscription-manager-2",
+        "private_key_pem": "-----BEGIN PRIVATE KEY-----\nMC4CAQAwBQYDK2VwBCIEIHYSOucPaDvz9waAM7c1Vy29Z+gaC09yCqyMaB+beF1f\n-----END PRIVATE KEY-----\n",
+        "domain": null
+      },
+      "credentials_issued": [],
+      "credentials_held": [
+        "3ec7e185-9d95-4eaf-b420-ae36190baff4"
+      ]
+    },
+    {
+      "index": 45,
+      "name": "user-subscription-manager-2",
+      "role": "user",
+      "did": "did:key:z6MkpD2QMjkyYQS6eKAJApe2di8YFL6RFsNXH3zNrEK5zt3w",
+      "identity_dict": {
+        "did": "did:key:z6MkpD2QMjkyYQS6eKAJApe2di8YFL6RFsNXH3zNrEK5zt3w",
+        "method": "key",
+        "name": "user-subscription-manager-2",
+        "private_key_pem": "-----BEGIN PRIVATE KEY-----\nMC4CAQAwBQYDK2VwBCIEIEzjfJwZgGhFguo3vT33yDVIXU+DvRraDrm7pEAAKMep\n-----END PRIVATE KEY-----\n",
+        "domain": null
+      },
+      "credentials_issued": [
+        "3ec7e185-9d95-4eaf-b420-ae36190baff4"
+      ],
+      "credentials_held": []
+    },
+    {
+      "index": 46,
+      "name": "customer-support-1",
+      "role": "service_agent",
+      "did": "did:key:z6MkjEkqX2zbHYeg9w4fHveuqGB9gSDUaZux8wBgKeEGjWZD",
+      "identity_dict": {
+        "did": "did:key:z6MkjEkqX2zbHYeg9w4fHveuqGB9gSDUaZux8wBgKeEGjWZD",
+        "method": "key",
+        "name": "customer-support-1",
+        "private_key_pem": "-----BEGIN PRIVATE KEY-----\nMC4CAQAwBQYDK2VwBCIEIIXpE4bmOA5D7zsGAAVfv5wHdt6Ext4RdMltPm+2cMhx\n-----END PRIVATE KEY-----\n",
+        "domain": null
+      },
+      "credentials_issued": [],
+      "credentials_held": [
+        "b9b356ec-027b-48a1-a71f-49e828de03f1"
+      ]
+    },
+    {
+      "index": 47,
+      "name": "customer-support-2",
+      "role": "service_agent",
+      "did": "did:key:z6MktwaV4qTVX1G8rhM13UPx1QEtYLFD1LK4pKd2JsyLKfaL",
+      "identity_dict": {
+        "did": "did:key:z6MktwaV4qTVX1G8rhM13UPx1QEtYLFD1LK4pKd2JsyLKfaL",
+        "method": "key",
+        "name": "customer-support-2",
+        "private_key_pem": "-----BEGIN PRIVATE KEY-----\nMC4CAQAwBQYDK2VwBCIEIIiIxWF+FLuRh7WcFv5kwZastn2khdsgf4/FvdAR+KPA\n-----END PRIVATE KEY-----\n",
+        "domain": null
+      },
+      "credentials_issued": [],
+      "credentials_held": [
+        "4d49d736-2e02-4a5f-ba0f-4a8e07842546"
+      ]
+    },
+    {
+      "index": 48,
+      "name": "customer-support-3",
+      "role": "service_agent",
+      "did": "did:key:z6MkrBvs9wgdDNLUZBff1W3JZWic3RFXVYrHBGHVVD6hXPSa",
+      "identity_dict": {
+        "did": "did:key:z6MkrBvs9wgdDNLUZBff1W3JZWic3RFXVYrHBGHVVD6hXPSa",
+        "method": "key",
+        "name": "customer-support-3",
+        "private_key_pem": "-----BEGIN PRIVATE KEY-----\nMC4CAQAwBQYDK2VwBCIEIHaxCobkGh7gTxrcylPnu+mYJ2Q0TKNrsiNpp79DWyE2\n-----END PRIVATE KEY-----\n",
+        "domain": null
+      },
+      "credentials_issued": [],
+      "credentials_held": [
+        "48206025-5cd3-4c01-bdcd-738a3868a8d6"
+      ]
+    },
+    {
+      "index": 49,
+      "name": "compliance-monitoring-1",
+      "role": "service_agent",
+      "did": "did:key:z6MkiQeaNcLezPnE64wbL2k75huRy4Sf6dYhctgB7W5sGsoR",
+      "identity_dict": {
+        "did": "did:key:z6MkiQeaNcLezPnE64wbL2k75huRy4Sf6dYhctgB7W5sGsoR",
+        "method": "key",
+        "name": "compliance-monitoring-1",
+        "private_key_pem": "-----BEGIN PRIVATE KEY-----\nMC4CAQAwBQYDK2VwBCIEIBtJd0UqsuRCL4QwFr8+wpw6ePsVZ1neV8mrTxwvxQfy\n-----END PRIVATE KEY-----\n",
+        "domain": null
+      },
+      "credentials_issued": [],
+      "credentials_held": [
+        "c7e54939-9760-4cbd-9915-2085b7a19eb0"
+      ]
+    },
+    {
+      "index": 50,
+      "name": "compliance-monitoring-2",
+      "role": "service_agent",
+      "did": "did:key:z6MkokqZ7KAmBrYhbwS4qVnNkqrHgzm2CKVGGj6BXZPnovz3",
+      "identity_dict": {
+        "did": "did:key:z6MkokqZ7KAmBrYhbwS4qVnNkqrHgzm2CKVGGj6BXZPnovz3",
+        "method": "key",
+        "name": "compliance-monitoring-2",
+        "private_key_pem": "-----BEGIN PRIVATE KEY-----\nMC4CAQAwBQYDK2VwBCIEICaGic1urZye//dxYv4zSNbV1ChrRbq2mrZvO5A8TJrf\n-----END PRIVATE KEY-----\n",
+        "domain": null
+      },
+      "credentials_issued": [],
+      "credentials_held": [
+        "06039da4-6488-42c4-aa1a-696b2a244fa2"
+      ]
+    },
+    {
+      "index": 51,
+      "name": "data-analysis-1",
+      "role": "service_agent",
+      "did": "did:key:z6MkujYBtcJNb3DQoCFCm74bCapFpDfJGdRrhQHgDuN4Tptf",
+      "identity_dict": {
+        "did": "did:key:z6MkujYBtcJNb3DQoCFCm74bCapFpDfJGdRrhQHgDuN4Tptf",
+        "method": "key",
+        "name": "data-analysis-1",
+        "private_key_pem": "-----BEGIN PRIVATE KEY-----\nMC4CAQAwBQYDK2VwBCIEIKZiW6Rh3Xb+Ng/DgoU4pfvQCN5hOoKjQ6t32hDrI7iq\n-----END PRIVATE KEY-----\n",
+        "domain": null
+      },
+      "credentials_issued": [],
+      "credentials_held": [
+        "f5ee994f-6787-4356-87eb-221afaa11cbf"
+      ]
+    },
+    {
+      "index": 52,
+      "name": "data-analysis-2",
+      "role": "service_agent",
+      "did": "did:key:z6Mkp8EkUVquGXjZ18CVjyqXKBTQ38LSQEAk6UkQUNGuBMYG",
+      "identity_dict": {
+        "did": "did:key:z6Mkp8EkUVquGXjZ18CVjyqXKBTQ38LSQEAk6UkQUNGuBMYG",
+        "method": "key",
+        "name": "data-analysis-2",
+        "private_key_pem": "-----BEGIN PRIVATE KEY-----\nMC4CAQAwBQYDK2VwBCIEIAe9h8Q7vLGBNwztpSAhIxb8/01BJ+y9SiGWDVjWeU6y\n-----END PRIVATE KEY-----\n",
+        "domain": null
+      },
+      "credentials_issued": [],
+      "credentials_held": [
+        "f3438e17-22e8-4bd0-80dd-776ab6baff45"
+      ]
+    },
+    {
+      "index": 53,
+      "name": "workflow-automation-1",
+      "role": "service_agent",
+      "did": "did:key:z6Mkgeg5q5c2dCKknmwwLA9peSzWXFrS48WgGYPpHpiFH36X",
+      "identity_dict": {
+        "did": "did:key:z6Mkgeg5q5c2dCKknmwwLA9peSzWXFrS48WgGYPpHpiFH36X",
+        "method": "key",
+        "name": "workflow-automation-1",
+        "private_key_pem": "-----BEGIN PRIVATE KEY-----\nMC4CAQAwBQYDK2VwBCIEIEqCwSOQ7dzt9YOEn1fAMf4TK0D0bJkDldZsg6fnxStH\n-----END PRIVATE KEY-----\n",
+        "domain": null
+      },
+      "credentials_issued": [],
+      "credentials_held": [
+        "72b2047c-a713-499a-b5b6-d4890f8faa66"
+      ]
+    },
+    {
+      "index": 54,
+      "name": "workflow-automation-2",
+      "role": "service_agent",
+      "did": "did:key:z6Mkg8V1UYVzTsyKbYyKjRQoTB74eyVJ2YNndPLB4Fr7d7SW",
+      "identity_dict": {
+        "did": "did:key:z6Mkg8V1UYVzTsyKbYyKjRQoTB74eyVJ2YNndPLB4Fr7d7SW",
+        "method": "key",
+        "name": "workflow-automation-2",
+        "private_key_pem": "-----BEGIN PRIVATE KEY-----\nMC4CAQAwBQYDK2VwBCIEICg4E6LxQnDIq5OOFiEsJ11kXU8gBN+zHQDoBHWpYya2\n-----END PRIVATE KEY-----\n",
+        "domain": null
+      },
+      "credentials_issued": [],
+      "credentials_held": [
+        "d0fe331b-3c92-43db-a43d-6c5aa854e208"
+      ]
+    },
+    {
+      "index": 55,
+      "name": "workflow-automation-3",
+      "role": "service_agent",
+      "did": "did:key:z6MkpfZGQGRBKCquYzPTbwdCXCnuji67L4k4DzEViDqgrynz",
+      "identity_dict": {
+        "did": "did:key:z6MkpfZGQGRBKCquYzPTbwdCXCnuji67L4k4DzEViDqgrynz",
+        "method": "key",
+        "name": "workflow-automation-3",
+        "private_key_pem": "-----BEGIN PRIVATE KEY-----\nMC4CAQAwBQYDK2VwBCIEIGGotlkzTfa6aWb7tRy94VzoYXMKGDiQqYGIzPZzXczk\n-----END PRIVATE KEY-----\n",
+        "domain": null
+      },
+      "credentials_issued": [],
+      "credentials_held": [
+        "cefcb462-c113-469e-b564-9ce9e7c63224"
+      ]
+    },
+    {
+      "index": 56,
+      "name": "expired-credential-agent",
+      "role": "edge_case",
+      "did": "did:key:z6MkiN1VH57Gj9i8WCdmNe1BRESqrLt2qdCQmCP1yuFNDqQy",
+      "identity_dict": {
+        "did": "did:key:z6MkiN1VH57Gj9i8WCdmNe1BRESqrLt2qdCQmCP1yuFNDqQy",
+        "method": "key",
+        "name": "expired-credential-agent",
+        "private_key_pem": "-----BEGIN PRIVATE KEY-----\nMC4CAQAwBQYDK2VwBCIEICjymqe35SumIOMjbbp0/n9+DlQKC26XCGXQzdqlrorg\n-----END PRIVATE KEY-----\n",
+        "domain": null
+      },
+      "credentials_issued": [],
+      "credentials_held": [
+        "6646593e-1364-4ab7-b480-ad977a671156"
+      ]
+    },
+    {
+      "index": 57,
+      "name": "revoked-credential-agent",
+      "role": "edge_case",
+      "did": "did:key:z6Mkj9UyL3b3UwTEBZLDCMVir4dtCEByG4Rxte9kZqSXp2TQ",
+      "identity_dict": {
+        "did": "did:key:z6Mkj9UyL3b3UwTEBZLDCMVir4dtCEByG4Rxte9kZqSXp2TQ",
+        "method": "key",
+        "name": "revoked-credential-agent",
+        "private_key_pem": "-----BEGIN PRIVATE KEY-----\nMC4CAQAwBQYDK2VwBCIEIDbjDMV8VRvnmEk2AdG8QNwKXp9FWUlHoEYAFYxrMNRB\n-----END PRIVATE KEY-----\n",
+        "domain": null
+      },
+      "credentials_issued": [],
+      "credentials_held": [
+        "5df4aa22-8ed4-4839-afec-d933111ad802"
+      ]
+    },
+    {
+      "index": 58,
+      "name": "no-credential-agent",
+      "role": "edge_case",
+      "did": "did:key:z6MkfhBevbxG3yY6jzaNc6xeEuSaFTfYhTsAPBCtjjY5ojTL",
+      "identity_dict": {
+        "did": "did:key:z6MkfhBevbxG3yY6jzaNc6xeEuSaFTfYhTsAPBCtjjY5ojTL",
+        "method": "key",
+        "name": "no-credential-agent",
+        "private_key_pem": "-----BEGIN PRIVATE KEY-----\nMC4CAQAwBQYDK2VwBCIEIJwlpZvQJY1CU2iGEyihMl5Bn9iLVTZE+FR5ZPAJCnTn\n-----END PRIVATE KEY-----\n",
+        "domain": null
+      },
+      "credentials_issued": [],
+      "credentials_held": []
+    },
+    {
+      "index": 59,
+      "name": "wrong-key-agent",
+      "role": "edge_case",
+      "did": "did:key:z6MkjNdRFuZY5QudGtj3vdt2MSWGk9itpFJjn2Vz64w4pmAU",
+      "identity_dict": {
+        "did": "did:key:z6MkjNdRFuZY5QudGtj3vdt2MSWGk9itpFJjn2Vz64w4pmAU",
+        "method": "key",
+        "name": "wrong-key-agent",
+        "private_key_pem": "-----BEGIN PRIVATE KEY-----\nMC4CAQAwBQYDK2VwBCIEIO7f/hBSMuQB/43091UToARS7sb1W1AThnR0kiQgE/T1\n-----END PRIVATE KEY-----\n",
+        "domain": null
+      },
+      "credentials_issued": [],
+      "credentials_held": []
+    },
+    {
+      "index": 60,
+      "name": "deep-delegation-agent",
+      "role": "edge_case",
+      "did": "did:key:z6MkpoQ6EHScZm68Edm3qkUkHMRK3PtqgaemAhKcDwCJoWGP",
+      "identity_dict": {
+        "did": "did:key:z6MkpoQ6EHScZm68Edm3qkUkHMRK3PtqgaemAhKcDwCJoWGP",
+        "method": "key",
+        "name": "deep-delegation-agent",
+        "private_key_pem": "-----BEGIN PRIVATE KEY-----\nMC4CAQAwBQYDK2VwBCIEIIeHWqbTA1maQF7N12Ip7PQ0Ae6nVt6lvZWoA20aklh6\n-----END PRIVATE KEY-----\n",
+        "domain": null
+      },
+      "credentials_issued": [],
+      "credentials_held": []
+    },
+    {
+      "index": 61,
+      "name": "escalated-privileges-agent",
+      "role": "edge_case",
+      "did": "did:key:z6Mknp7g8iifyzKqFYEu41TeNRT2PaHGp6ujGiMTtPT8BKcZ",
+      "identity_dict": {
+        "did": "did:key:z6Mknp7g8iifyzKqFYEu41TeNRT2PaHGp6ujGiMTtPT8BKcZ",
+        "method": "key",
+        "name": "escalated-privileges-agent",
+        "private_key_pem": "-----BEGIN PRIVATE KEY-----\nMC4CAQAwBQYDK2VwBCIEIJOM6tQ9VTKoncnLyxZJbkluIITbwpntr6Z+UVc2FQGE\n-----END PRIVATE KEY-----\n",
+        "domain": null
+      },
+      "credentials_issued": [],
+      "credentials_held": []
+    },
+    {
+      "index": 62,
+      "name": "expired-parent-agent",
+      "role": "edge_case",
+      "did": "did:key:z6MksHWK7AXno6vUuhxmY9QcWTseZ78Y8Hk7V4dKtM3X2fs7",
+      "identity_dict": {
+        "did": "did:key:z6MksHWK7AXno6vUuhxmY9QcWTseZ78Y8Hk7V4dKtM3X2fs7",
+        "method": "key",
+        "name": "expired-parent-agent",
+        "private_key_pem": "-----BEGIN PRIVATE KEY-----\nMC4CAQAwBQYDK2VwBCIEIG4I5unP7JXR/v6+cX9q8GMUUzbn3iSArKEzWcwMIrbH\n-----END PRIVATE KEY-----\n",
+        "domain": null
+      },
+      "credentials_issued": [],
+      "credentials_held": []
+    },
+    {
+      "index": 63,
+      "name": "self-signed-agent",
+      "role": "edge_case",
+      "did": "did:key:z6MktRkyXBPtpKuw7XKS2e3K5TZmKyf42yKukAjaWPhguynZ",
+      "identity_dict": {
+        "did": "did:key:z6MktRkyXBPtpKuw7XKS2e3K5TZmKyf42yKukAjaWPhguynZ",
+        "method": "key",
+        "name": "self-signed-agent",
+        "private_key_pem": "-----BEGIN PRIVATE KEY-----\nMC4CAQAwBQYDK2VwBCIEIE0OqZZDqX8xRQOXycmYtoVzJId1mjw3CtJVAbvpStrh\n-----END PRIVATE KEY-----\n",
+        "domain": null
+      },
+      "credentials_issued": [
+        "35bdc6a0-2d18-489b-b67e-7ab0abdbab79"
+      ],
+      "credentials_held": [
+        "35bdc6a0-2d18-489b-b67e-7ab0abdbab79"
+      ]
+    },
+    {
+      "index": 64,
+      "name": "future-dated-agent",
+      "role": "edge_case",
+      "did": "did:key:z6MkfRD9fvMSbWk7mYvvyuEkeGqHapJzz5p8CrYBLhMioXbh",
+      "identity_dict": {
+        "did": "did:key:z6MkfRD9fvMSbWk7mYvvyuEkeGqHapJzz5p8CrYBLhMioXbh",
+        "method": "key",
+        "name": "future-dated-agent",
+        "private_key_pem": "-----BEGIN PRIVATE KEY-----\nMC4CAQAwBQYDK2VwBCIEII+KWBHBgBwG6RygXAQBaM6PSQOUJuyQvZGUMA3ItXFt\n-----END PRIVATE KEY-----\n",
+        "domain": null
+      },
+      "credentials_issued": [],
+      "credentials_held": []
+    },
+    {
+      "index": 65,
+      "name": "massive-scope-agent",
+      "role": "edge_case",
+      "did": "did:key:z6Mkj8cm494eVJZBm4TKmutiBffdC3P3Uyw9EJZhoMQGRFW2",
+      "identity_dict": {
+        "did": "did:key:z6Mkj8cm494eVJZBm4TKmutiBffdC3P3Uyw9EJZhoMQGRFW2",
+        "method": "key",
+        "name": "massive-scope-agent",
+        "private_key_pem": "-----BEGIN PRIVATE KEY-----\nMC4CAQAwBQYDK2VwBCIEIAhKYP4A3/jVwnPJA8VubIDReOm48BG17K9fDXTiagJJ\n-----END PRIVATE KEY-----\n",
+        "domain": null
+      },
+      "credentials_issued": [],
+      "credentials_held": [
+        "6d5e14c1-4187-4612-9483-3970979ae056"
+      ]
+    },
+    {
+      "index": 66,
+      "name": "massive-user",
+      "role": "user",
+      "did": "did:key:z6MkvBkjEws4ZwrZPgsWzqnYAT74rDEsdGgExaSG8KMBe116",
+      "identity_dict": {
+        "did": "did:key:z6MkvBkjEws4ZwrZPgsWzqnYAT74rDEsdGgExaSG8KMBe116",
+        "method": "key",
+        "name": "massive-user",
+        "private_key_pem": "-----BEGIN PRIVATE KEY-----\nMC4CAQAwBQYDK2VwBCIEIBX7ajKxkmWPalF6HSsUQEys2hgIZjh/QIPIXk3w4Gm8\n-----END PRIVATE KEY-----\n",
+        "domain": null
+      },
+      "credentials_issued": [
+        "6d5e14c1-4187-4612-9483-3970979ae056"
+      ],
+      "credentials_held": []
+    }
+  ]
+}

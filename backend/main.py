@@ -5,17 +5,25 @@ from api.middleware.limits import MaxBodySizeMiddleware
 from api.middleware.rate_limit import SimpleRateLimitMiddleware
 
 from api.routes.agents import router as agents_router
+from api.routes.admin import router as admin_router
 from api.routes.audit import router as audit_router
 from api.routes.auth import router as auth_router
 from api.routes.workflows import router as workflows_router
 from api.routes.keys import router as keys_router
 from api.routes.demo import router as demo_router
 from api.routes.credentials import router as credentials_router
+from api.routes.delegations import router as delegations_router
 from api.routes.dids import router as dids_router
 from api.routes.revoke import router as revoke_router
 from api.routes.status import router as status_router
 from api.routes.verify import router as verify_router
 from api.routes.requirement_intents import router as requirement_intents_router
+from api.routes.commerce import router as commerce_router
+from api.routes.trust import router as trust_router
+from api.routes.webhooks import router as webhooks_router
+from api.routes.spiffe_bridge import router as spiffe_bridge_router
+from api.routes.compliance import router as compliance_router
+from api.routes.marketplace import router as marketplace_router
 from api.routes.static_ui import mount_ui
 from core.settings import settings
 from core.startup import init_db
@@ -122,8 +130,10 @@ if settings.rate_limit_enabled:
     app.add_middleware(SimpleRateLimitMiddleware, max_requests=settings.rate_limit_per_minute, window_seconds=60)
 
 app.include_router(agents_router)
+app.include_router(admin_router)
 app.include_router(dids_router)
 app.include_router(credentials_router)
+app.include_router(delegations_router)
 app.include_router(status_router)
 app.include_router(verify_router)
 app.include_router(revoke_router)
@@ -133,6 +143,12 @@ app.include_router(workflows_router)
 app.include_router(keys_router)
 app.include_router(demo_router)
 app.include_router(requirement_intents_router)
+app.include_router(commerce_router)
+app.include_router(trust_router)
+app.include_router(webhooks_router)
+app.include_router(spiffe_bridge_router)
+app.include_router(compliance_router)
+app.include_router(marketplace_router)
 
 
 @app.on_event("startup")

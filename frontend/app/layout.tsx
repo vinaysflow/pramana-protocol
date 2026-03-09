@@ -1,3 +1,5 @@
+import "./globals.css";
+
 export const metadata = {
   title: "Pramana Protocol",
   description: "Portable AI Agent Identity using W3C Standards",

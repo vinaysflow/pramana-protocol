@@ -64,10 +64,33 @@ class Settings(BaseSettings):
     demo_mode: bool = Field(default=bool(os.getenv("SPACE_ID") or os.getenv("HF_SPACE") or os.getenv("HF_HOME")), validation_alias="DEMO_MODE")
     demo_jwt_secret: str = Field(default="demo-secret-change", validation_alias="DEMO_JWT_SECRET")
     demo_token_ttl_seconds: int = Field(default=3600, validation_alias="DEMO_TOKEN_TTL_SECONDS")
+    demo_auto_seed: bool = Field(default=bool(os.getenv("DEMO_AUTO_SEED", "").lower() in ("1", "true", "yes")), validation_alias="DEMO_AUTO_SEED")
+    demo_seed_profile: str = Field(default=os.getenv("DEMO_SEED_PROFILE", "standard"), validation_alias="DEMO_SEED_PROFILE")
 
     max_body_bytes: int = Field(default=1_000_000, validation_alias="MAX_BODY_BYTES")
     rate_limit_enabled: bool = Field(default=False, validation_alias="RATE_LIMIT_ENABLED")
     rate_limit_per_minute: int = Field(default=120, validation_alias="RATE_LIMIT_PER_MINUTE")
+
+    # Connection pool settings (PostgreSQL only)
+    db_pool_size: int = Field(default=10, validation_alias="DB_POOL_SIZE")
+    db_max_overflow: int = Field(default=20, validation_alias="DB_MAX_OVERFLOW")
+    db_pool_timeout: int = Field(default=30, validation_alias="DB_POOL_TIMEOUT")
+    db_pool_recycle: int = Field(default=1800, validation_alias="DB_POOL_RECYCLE")
+
+    # DID resolver cache settings
+    did_cache_ttl_seconds: int = Field(default=300, validation_alias="DID_CACHE_TTL_SECONDS")
+    did_cache_max_size: int = Field(default=10000, validation_alias="DID_CACHE_MAX_SIZE")
+
+    # JTI deduplication
+    jti_dedup_enabled: bool = Field(default=True, validation_alias="JTI_DEDUP_ENABLED")
+    jti_dedup_window_seconds: int = Field(default=3600, validation_alias="JTI_DEDUP_WINDOW_SECONDS")
+
+    def model_post_init(self, __context: object) -> None:
+        if self.env == "production" and not self.database_url.startswith("postgresql"):
+            raise ValueError(
+                "DATABASE_URL must be a PostgreSQL URL when ENV=production. "
+                f"Got: {self.database_url!r}"
+            )
 
     @property
     def allowed_origins(self) -> list[str]:

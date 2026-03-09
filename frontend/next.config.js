@@ -1,10 +1,13 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  output: 'export',
-  // Required for static hosting with FastAPI StaticFiles(html=True):
-  // ensures routes like /demo map to demo/index.html (instead of demo.html).
-  trailingSlash: true,
+  // 'export' is only needed for HF Spaces / FastAPI static hosting.
+  // In dev mode (next dev) we run as a real server so NEXT_PUBLIC_API_URL
+  // is read from .env.local at startup — do not set output:'export' here.
+  ...(process.env.NEXT_STATIC_EXPORT === '1' ? {
+    output: 'export',
+    trailingSlash: true,
+  } : {}),
 };
 
 module.exports = nextConfig;

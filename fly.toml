@@ -1,0 +1,57 @@
+# Fly.io configuration for Pramana Protocol
+# https://fly.io/docs/reference/configuration/
+
+app = "pramana-protocol"
+primary_region = "iad"
+
+[build]
+  dockerfile = "Dockerfile"
+
+[env]
+  ENV = "production"
+  MIGRATIONS_STRICT = "1"
+  LOG_LEVEL = "INFO"
+  PORT = "8000"
+  PYTHONPATH = "/app/backend"
+
+# Secrets managed separately via: fly secrets set KEY=value
+# Required secrets:
+#   API_SECRET_KEY
+#   AUTH_JWT_SECRET
+#   DATABASE_URL          (set automatically by postgres attach)
+#   PRAMANA_DOMAIN
+#   ALLOWED_ORIGINS
+
+[[services]]
+  internal_port = 8000
+  protocol = "tcp"
+  auto_stop_machines = true
+  auto_start_machines = true
+  min_machines_running = 1
+
+  [[services.ports]]
+    handlers = ["http"]
+    port = 80
+    force_https = true
+
+  [[services.ports]]
+    handlers = ["tls", "http"]
+    port = 443
+
+  [services.concurrency]
+    type = "connections"
+    hard_limit = 500
+    soft_limit = 400
+
+  [[services.http_checks]]
+    interval = "15s"
+    timeout = "5s"
+    grace_period = "30s"
+    method = "get"
+    path = "/health"
+    protocol = "http"
+
+[[vm]]
+  memory = "512mb"
+  cpu_kind = "shared"
+  cpus = 1

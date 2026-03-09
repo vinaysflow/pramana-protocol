@@ -1,0 +1,373 @@
+{
+  "scenarios": [
+    {
+      "id": "happy-purchase-shoes",
+      "description": "Personal shopper buys shoes within budget from any merchant",
+      "type": "happy_path",
+      "steps": [
+        {
+          "action": "verify_delegation",
+          "agent": "personal-shopper-basic",
+          "expected": "success"
+        },
+        {
+          "action": "verify_mandate",
+          "mandate_id": "mandate-shoes",
+          "expected": "success"
+        },
+        {
+          "action": "check_trust_score",
+          "agent": "personal-shopper-basic",
+          "expected_range": [
+            55,
+            75
+          ]
+        }
+      ]
+    },
+    {
+      "id": "happy-purchase-electronics",
+      "description": "Personal shopper buys electronics within budget",
+      "type": "happy_path",
+      "steps": [
+        {
+          "action": "verify_delegation",
+          "agent": "personal-shopper-electronics",
+          "expected": "success"
+        },
+        {
+          "action": "verify_mandate",
+          "mandate_id": "mandate-electronics",
+          "expected": "success"
+        }
+      ]
+    },
+    {
+      "id": "happy-india-purchase",
+      "description": "India shopper with INR budget",
+      "type": "happy_path",
+      "steps": [
+        {
+          "action": "verify_delegation",
+          "agent": "personal-shopper-india",
+          "expected": "success"
+        },
+        {
+          "action": "verify_mandate",
+          "mandate_id": "mandate-india",
+          "expected": "success"
+        }
+      ]
+    },
+    {
+      "id": "happy-corp-procurement",
+      "description": "Corporate procurement within scope",
+      "type": "happy_path",
+      "steps": [
+        {
+          "action": "verify_delegation",
+          "agent": "corp-procurement-small",
+          "expected": "success"
+        },
+        {
+          "action": "verify_mandate",
+          "mandate_id": "mandate-office",
+          "expected": "success"
+        }
+      ]
+    },
+    {
+      "id": "happy-cloud-purchase",
+      "description": "Cloud procurement agent",
+      "type": "happy_path",
+      "steps": [
+        {
+          "action": "verify_delegation",
+          "agent": "corp-procurement-cloud",
+          "expected": "success"
+        },
+        {
+          "action": "verify_mandate",
+          "mandate_id": "mandate-cloud",
+          "expected": "success"
+        }
+      ]
+    },
+    {
+      "id": "happy-subscription",
+      "description": "Subscription manager",
+      "type": "happy_path",
+      "steps": [
+        {
+          "action": "verify_delegation",
+          "agent": "subscription-manager-1",
+          "expected": "success"
+        },
+        {
+          "action": "verify_mandate",
+          "mandate_id": "mandate-subscribe",
+          "expected": "success"
+        }
+      ]
+    },
+    {
+      "id": "happy-comparison-agent",
+      "description": "Comparison agent view only",
+      "type": "happy_path",
+      "steps": [
+        {
+          "action": "verify_delegation",
+          "agent": "comparison-agent-1",
+          "expected": "success"
+        },
+        {
+          "action": "verify_delegation",
+          "agent": "comparison-agent-1",
+          "required_action": "view",
+          "expected": "success"
+        }
+      ]
+    },
+    {
+      "id": "happy-service-credential",
+      "description": "Service agent CapabilityCredential",
+      "type": "happy_path",
+      "steps": [
+        {
+          "action": "verify_vc",
+          "agent": "customer-support-1",
+          "expected": "success"
+        }
+      ]
+    },
+    {
+      "id": "happy-merchant-credential",
+      "description": "Merchant credential verification",
+      "type": "happy_path",
+      "steps": [
+        {
+          "action": "verify_vc",
+          "agent": "amazon-electronics",
+          "expected": "success"
+        }
+      ]
+    },
+    {
+      "id": "happy-delegation-chain",
+      "description": "Two-level delegation chain",
+      "type": "happy_path",
+      "steps": [
+        {
+          "action": "verify_delegation",
+          "agent": "personal-shopper-premium",
+          "expected": "success",
+          "required_action": "negotiate"
+        }
+      ]
+    },
+    {
+      "id": "cross-org-untrusted",
+      "description": "Agent from org A, verifier trusts only org B",
+      "type": "cross_org",
+      "steps": [
+        {
+          "action": "verify_with_trusted_issuers",
+          "agent": "customer-support-1",
+          "trusted_issuers": [
+            "did:key:z000fake"
+          ],
+          "expected": "failure",
+          "expected_reason": "Untrusted"
+        }
+      ]
+    },
+    {
+      "id": "cross-org-trusted",
+      "description": "Agent from trusted issuer",
+      "type": "cross_org",
+      "steps": [
+        {
+          "action": "verify_with_trusted_issuers",
+          "agent": "customer-support-1",
+          "trusted_issuers": [
+            "acme"
+          ],
+          "expected": "success"
+        }
+      ]
+    },
+    {
+      "id": "failure-expired",
+      "description": "Expired credential",
+      "type": "failure",
+      "steps": [
+        {
+          "action": "verify_vc",
+          "agent": "expired-credential-agent",
+          "expected": "failure",
+          "expected_reason": "expired"
+        }
+      ]
+    },
+    {
+      "id": "failure-over-budget",
+      "description": "Cart exceeds intent budget",
+      "type": "failure",
+      "steps": [
+        {
+          "action": "issue_cart_mandate",
+          "agent": "personal-shopper-basic",
+          "cart_total": 7500,
+          "intent_max": 5000,
+          "expected": "failure",
+          "expected_reason": "exceeds"
+        }
+      ]
+    },
+    {
+      "id": "failure-wrong-key",
+      "description": "Tampered issuer DID",
+      "type": "failure",
+      "steps": [
+        {
+          "action": "verify_vc",
+          "agent": "wrong-key-agent",
+          "expected": "failure",
+          "expected_reason": "signature"
+        }
+      ]
+    },
+    {
+      "id": "failure-no-credential",
+      "description": "Agent with no credentials",
+      "type": "failure",
+      "steps": [
+        {
+          "action": "verify_vc",
+          "agent": "no-credential-agent",
+          "expected": "failure"
+        }
+      ]
+    },
+    {
+      "id": "failure-wrong-scope",
+      "description": "Action not in delegation scope",
+      "type": "failure",
+      "steps": [
+        {
+          "action": "verify_delegation",
+          "agent": "personal-shopper-basic",
+          "required_action": "admin",
+          "expected": "failure"
+        }
+      ]
+    },
+    {
+      "id": "edge-deep-delegation",
+      "description": "Delegation chain exceeds max depth",
+      "type": "edge_case",
+      "steps": [
+        {
+          "action": "verify_delegation",
+          "agent": "deep-delegation-agent",
+          "expected": "failure",
+          "expected_reason": "depth"
+        }
+      ]
+    },
+    {
+      "id": "edge-escalation",
+      "description": "Scope escalation attempt",
+      "type": "edge_case",
+      "steps": [
+        {
+          "action": "delegate_further",
+          "agent": "escalated-privileges-agent",
+          "expected": "failure",
+          "expected_reason": "ScopeEscalationError"
+        }
+      ]
+    },
+    {
+      "id": "edge-self-signed",
+      "description": "Self-issued credential",
+      "type": "edge_case",
+      "steps": [
+        {
+          "action": "verify_vc",
+          "agent": "self-signed-agent",
+          "expected": "success"
+        }
+      ]
+    },
+    {
+      "id": "edge-future-dated",
+      "description": "Credential with future iat",
+      "type": "edge_case",
+      "steps": [
+        {
+          "action": "verify_vc",
+          "agent": "future-dated-agent",
+          "expected": "failure"
+        }
+      ]
+    },
+    {
+      "id": "edge-massive-scope",
+      "description": "Delegation with very broad scope",
+      "type": "edge_case",
+      "steps": [
+        {
+          "action": "verify_delegation",
+          "agent": "massive-scope-agent",
+          "expected": "success"
+        },
+        {
+          "action": "check_trust_score",
+          "agent": "massive-scope-agent",
+          "expected_range": [
+            20,
+            50
+          ]
+        }
+      ]
+    },
+    {
+      "id": "happy-mandate-verify",
+      "description": "Verify cart mandate with parent intent",
+      "type": "happy_path",
+      "steps": [
+        {
+          "action": "verify_mandate",
+          "mandate_id": "mandate-groceries",
+          "expected": "success"
+        }
+      ]
+    },
+    {
+      "id": "happy-premium-shopper",
+      "description": "Premium shopper with negotiate",
+      "type": "happy_path",
+      "steps": [
+        {
+          "action": "verify_delegation",
+          "agent": "personal-shopper-premium",
+          "required_action": "purchase",
+          "expected": "success"
+        }
+      ]
+    },
+    {
+      "id": "failure-restricted-merchant",
+      "description": "Shopper tries merchant outside scope",
+      "type": "failure",
+      "steps": [
+        {
+          "action": "verify_delegation",
+          "agent": "corp-procurement-restricted",
+          "expected": "success"
+        }
+      ]
+    }
+  ]
+}

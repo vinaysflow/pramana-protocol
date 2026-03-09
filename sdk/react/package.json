@@ -1,0 +1,53 @@
+{
+  "name": "@pramana/react",
+  "version": "0.1.0",
+  "description": "React hooks for Pramana Protocol — AI agent identity, credentials, delegation and commerce",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "license": "MIT",
+  "keywords": ["react", "ai-agents", "did", "verifiable-credentials", "zero-trust", "pramana"],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vinaysflow/pramana-protocol.git",
+    "directory": "sdk/react"
+  },
+  "scripts": {
+    "build": "tsc",
+    "prepublishOnly": "npm run build",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "pack:dry": "npm pack --dry-run"
+  },
+  "peerDependencies": {
+    "react": ">=18"
+  },
+  "dependencies": {
+    "@pramana/sdk": "^0.2.0"
+  },
+  "devDependencies": {
+    "@pramana/sdk": "file:../typescript",
+    "@testing-library/react": "^16.0.0",
+    "@types/react": "^19.0.0",
+    "@vitejs/plugin-react": "^4.3.0",
+    "happy-dom": "^20.8.3",
+    "jsdom": "^25.0.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "typescript": "^5.5.0",
+    "vitest": "^2.0.0"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

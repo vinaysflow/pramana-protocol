@@ -52,3 +52,13 @@ private_keys/
 # OS
 Thumbs.db
 .DS_Store
+
+# GTM agent is a separate project — never commit to this repo
+gtm-agent/
+
+# Build artifacts — generated locally, not committed
+*.whl
+*.tgz
+*.tar.gz
+*.zip
+sdk/dist/

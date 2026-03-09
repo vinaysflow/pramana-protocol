@@ -20,8 +20,15 @@ def issue_demo_token(*, tenant_id: str, ttl_seconds: int) -> tuple[str, int]:
         "iat": now,
         "exp": exp,
         "tenant": tenant_id,
-        # demo scopes include admin so audit works
-        "scope": ["agents:create", "credentials:issue", "credentials:revoke", "tenant:admin"],
+        # demo scopes — full access for interactive demo
+        "scope": [
+            "agents:create", "agents:read",
+            "credentials:issue", "credentials:verify", "credentials:revoke",
+            "delegations:verify", "delegations:read",
+            "commerce:verify", "commerce:read",
+            "trust:read", "compliance:read", "marketplace:read",
+            "tenant:admin",
+        ],
         "demo": True,
         "jti": secrets.token_urlsafe(16),
     }

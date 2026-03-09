@@ -91,3 +91,63 @@ cd backend
 . .venv/bin/activate
 python tools/verifier_cli.py --jwt "<VC_JWT>"
 ```
+
+---
+
+## SDK Quickstart
+
+Both SDKs work fully offline — no server required for `did:key` identities.
+
+### Python
+
+```bash
+pip install pramana-sdk
+```
+
+```python
+from pramana import AgentIdentity, issue_vc, verify_vc
+
+# Create an agent identity (offline)
+agent = AgentIdentity.create("my-shopping-bot")
+print(agent.did)  # did:key:z6Mk...
+
+# Issue a Verifiable Credential
+vc = issue_vc(
+    issuer=agent,
+    subject_did="did:key:z6MkTarget...",
+    credential_type="CapabilityCredential",
+    claims={"capability": "purchase", "max_amount": 10000},
+)
+
+# Verify it (offline for did:key)
+result = verify_vc(vc)
+assert result.verified == True
+```
+
+See [`sdk/python/README.md`](sdk/python/README.md) for delegation chains, Verifiable Presentations, and full API reference.
+
+### TypeScript / JavaScript
+
+```bash
+npm install @pramana/sdk
+```
+
+```typescript
+import { AgentIdentity, issueVC, verifyVC } from "@pramana/sdk";
+
+// Create an agent identity (offline)
+const agent = await AgentIdentity.create("my-shopping-bot");
+console.log(agent.did); // did:key:z6Mk...
+
+// Issue a Verifiable Credential
+const vc = await issueVC(agent, "did:key:z6MkTarget...", {
+  credentialType: "CapabilityCredential",
+  claims: { capability: "purchase", max_amount: 10000 },
+});
+
+// Verify it (offline for did:key)
+const result = await verifyVC(vc);
+console.log(result.valid); // true
+```
+
+See [`sdk/typescript/README.md`](sdk/typescript/README.md) for delegation chains, Verifiable Presentations, and full API reference.

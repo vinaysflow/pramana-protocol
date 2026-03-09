@@ -4,17 +4,18 @@ import uuid
 from datetime import datetime
 from typing import Any, Optional
 
-from fastapi import APIRouter, HTTPException, Depends
+from fastapi import APIRouter, BackgroundTasks, Depends, HTTPException
 from pydantic import BaseModel, Field
 
+from api.middleware.authz import require_scopes
 from core import did as did_core
 from core.audit import write_audit
 from core.db import db_session
 from core.settings import settings
 from core.status_list import allocate_index, get_or_create_default_list
-from core.vc import issue_vc_jwt
 from core.tenancy import ensure_tenant
-from api.middleware.authz import require_scopes
+from core.vc import issue_vc_jwt
+from core.webhooks import dispatch_webhook_event
 from models import Agent, Credential
 
 router = APIRouter(prefix="/v1/credentials", tags=["credentials"])
@@ -39,7 +40,11 @@ class IssueCredentialResponse(BaseModel):
 
 
 @router.post("/issue", response_model=IssueCredentialResponse)
-def issue_credential(req: IssueCredentialRequest, auth: dict = Depends(require_scopes(["credentials:issue"]))):
+def issue_credential(
+    req: IssueCredentialRequest,
+    background_tasks: BackgroundTasks,
+    auth: dict = Depends(require_scopes(["credentials:issue"])),
+):
     tenant_id = auth.get("tenant_id", "default")
     sl = get_or_create_default_list(tenant_id=tenant_id)
     index = allocate_index(sl.id)
@@ -88,6 +93,19 @@ def issue_credential(req: IssueCredentialRequest, auth: dict = Depends(require_s
         resource_type="credential",
         resource_id=str(cred.id),
         payload={"jti": jti, "subject": req.subject_did, "type": req.credential_type, "status_list_index": index},
+    )
+
+    background_tasks.add_task(
+        dispatch_webhook_event,
+        tenant_id,
+        "credential.issued",
+        {
+            "credential_id": str(cred.id),
+            "jti": jti,
+            "issuer_agent_id": str(req.issuer_agent_id),
+            "subject_did": req.subject_did,
+            "credential_type": req.credential_type,
+        },
     )
 
     return IssueCredentialResponse(

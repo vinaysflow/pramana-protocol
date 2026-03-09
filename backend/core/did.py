@@ -12,6 +12,36 @@ from core.settings import settings
 
 DID_CONTEXT = "https://www.w3.org/ns/did/v1"
 
+# ---------------------------------------------------------------------------
+# SPIFFE ID support
+# ---------------------------------------------------------------------------
+
+def parse_spiffe_id(uri: str) -> tuple[str, str]:
+    """Parse a SPIFFE ID into (trust_domain, workload_path).
+
+    Example: spiffe://acme.corp/ns/prod/sa/billing-agent
+    -> ("acme.corp", "/ns/prod/sa/billing-agent")
+    """
+    if not uri.startswith("spiffe://"):
+        raise ValueError(f"Not a SPIFFE ID: {uri!r}")
+    remainder = uri[len("spiffe://"):]
+    slash = remainder.find("/")
+    if slash == -1:
+        return remainder, "/"
+    return remainder[:slash], remainder[slash:]
+
+
+def is_spiffe_id(identifier: str) -> bool:
+    """Return True if the identifier is a SPIFFE URI."""
+    return identifier.startswith("spiffe://")
+
+
+def create_spiffe_id(trust_domain: str, workload_path: str) -> str:
+    """Construct a canonical SPIFFE URI."""
+    if not workload_path.startswith("/"):
+        workload_path = "/" + workload_path
+    return f"spiffe://{trust_domain}{workload_path}"
+
 
 def _b64url(data: bytes) -> str:
     return base64.urlsafe_b64encode(data).rstrip(b"=").decode("ascii")
